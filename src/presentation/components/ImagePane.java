@@ -14,6 +14,7 @@ public class ImagePane  extends JPanel{
 	
 	private String image; 
 	private BufferedImage imagebuffer;
+    private Color bgColor = new Color(250,227,214);
 
     public BufferedImage getImagebuffer() {
     	setBackground(Color.green);
@@ -25,7 +26,9 @@ public class ImagePane  extends JPanel{
 	}
 
 	public ImagePane(String image) {
-       try {                
+		setBackground(bgColor);
+
+		try {
     	   imagebuffer = ImageIO.read(new File(image));
        } catch (IOException ex) {
        }

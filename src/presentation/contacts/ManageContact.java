@@ -1,7 +1,6 @@
 package presentation.contacts;
 
 import presentation.components.ImagePane;
-import presentation.components.LabeledTextField;
 import presentation.components.RowField;
 
 import javax.swing.*;
