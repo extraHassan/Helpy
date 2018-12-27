@@ -5,11 +5,12 @@ import models.Contact;
 import javax.swing.*;
 import java.awt.*;
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.Vector;
 
 public class ListPane extends JPanel {
-    private Vector<Contact> contacts = new Vector<>();
-    private Vector<RowContact> rowContacts = new Vector<>();
+    private HashMap<Integer,Contact> contacts = new HashMap<>();
+    private HashMap<Integer,RowContact> rowContacts = new HashMap<>();
 
     public ListPane(){
         setLayout(new BorderLayout());
@@ -20,14 +21,15 @@ public class ListPane extends JPanel {
         contactsToContactsPanes();
         GridLayout gridLayout=new GridLayout(rowContacts.size(),1);
         setLayout(gridLayout);
-        for(RowContact rc : rowContacts){
-            add(rc);
+        for(int i=0;i<rowContacts.size();i++){
+            add(new RowContact(this,contacts.get(0)));
         }
     }
 
     public void contactsToContactsPanes(){
         System.out.println(contacts.size());
-        for (Contact c : contacts){
+        for(int i=0;i<contacts.size();i++){
+            Contact c = contacts.get(i);
             c.setDateAdded(new Date(System.currentTimeMillis()));
             c.setFavorite(true);
             c.setGroup("famille");
@@ -35,17 +37,27 @@ public class ListPane extends JPanel {
             c.setImage("resources/images/contact.png");
             c.setName("zouhir bibi");
             c.setNumber("0635135348");
-            rowContacts.add(new RowContact(c));
+            rowContacts.put(c.getId(),new RowContact(this,c));
         }
     }
 
-    public Vector<Contact> getContacts() {
+    public HashMap<Integer, Contact> getContacts() {
         return contacts;
     }
 
-    public void setContacts(Vector<Contact> contacts) {
+    public void setContacts(Vector<Contact> conta) {
+        for(Contact c : conta){
+            contacts.put(c.getId(),c);
+        }
         this.contacts = contacts;
         buildPane();
     }
 
+    public HashMap<Integer, RowContact> getRowContacts() {
+        return rowContacts;
+    }
+
+    public void setRowContacts(HashMap<Integer, RowContact> rowContacts) {
+        this.rowContacts = rowContacts;
+    }
 }
