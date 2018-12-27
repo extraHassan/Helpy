@@ -56,7 +56,7 @@ public class ManageContact extends JPanel {
         initSaveOrRest();
         initImage();
         initForm();
-        setBorder(designer.getEmptyBorder());
+        setBorder(designer.getSmallMargin());
         setBackground(designer.getHeavyBgColor());
         add(image,BorderLayout.NORTH);
         add(form,BorderLayout.CENTER);

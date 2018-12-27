@@ -11,11 +11,20 @@ public class Designer {
     private Color HeavyBgColor = new Color(227,204,189);
     private Color fontColor= new Color(17,47,59);
     private Color borderColor= new Color(227,204,189);
-    private EmptyBorder emptyBorder = new EmptyBorder(4,2,4,2);
+    private EmptyBorder smallMargin = new EmptyBorder(4,2,4,2);
     private MatteBorder BottomMatteBorder = new MatteBorder(0,0,1,0,borderColor);
     private MatteBorder BlackBottomMatteBorder = new MatteBorder(0,0,1,0,Color.black);
+    private EmptyBorder prayerTimesMargin = new EmptyBorder(100,100,100,50);
     private Color lightGreen = new Color(107,186,181);
     private Color heavyGreen = new Color(43,115,121);
+
+    public EmptyBorder getPrayerTimesMargin() {
+        return prayerTimesMargin;
+    }
+
+    public void setPrayerTimesMargin(EmptyBorder prayerTimesMargin) {
+        this.prayerTimesMargin = prayerTimesMargin;
+    }
 
     public Color getHeavyGreen() {
         return heavyGreen;
@@ -89,11 +98,11 @@ public class Designer {
         this.borderColor = borderColor;
     }
 
-    public EmptyBorder getEmptyBorder() {
-        return emptyBorder;
+    public EmptyBorder getSmallMargin() {
+        return smallMargin;
     }
 
-    public void setEmptyBorder(EmptyBorder emptyBorder) {
-        this.emptyBorder = emptyBorder;
+    public void setSmallMargin(EmptyBorder smallMargin) {
+        this.smallMargin = smallMargin;
     }
 }
