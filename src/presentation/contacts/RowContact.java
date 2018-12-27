@@ -1,24 +1,32 @@
 package presentation.contacts;
 
+import models.Contact;
 import presentation.components.ImagePane;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class RowContact extends JPanel {
 
-    private  JPanel center =null;
-    private JLabel date = new JLabel("added le 15/12/2018 at 12:45 pm");
+    private JPanel center =null;
+    private JLabel date;
     private JPanel contactHandler = new JPanel(new GridLayout(1,3,10,0));
     private ImagePane profile = new ImagePane("resources/images/contact.png");
-    private JLabel nameAndGroup = new JLabel("unknown (group)");
-    private JLabel phone = new JLabel("no number exist!");
+    private JLabel nameAndGroup;
+    private JLabel phone;
+
     private Font font =new Font("Georgia",Font.ROMAN_BASELINE, 20);
     private Color bgColor = new Color(250,227,214);
     private Color fontColor= new Color(17,47,59);
     private Color borderColor= new Color(227,204,189);
+    EmptyBorder emptyBorder = new EmptyBorder(4,2,4,2);
+
+    private Contact contact;
 
     public void initDate(){
+        String labelDate  = contact.getDateAdded().toString();
+        date=new JLabel(labelDate);
         date.setFont(font);
         date.setHorizontalAlignment(SwingConstants.CENTER);
         date.setForeground(fontColor);
@@ -26,6 +34,8 @@ public class RowContact extends JPanel {
     }
 
     public void initPhone(){
+        String labelPhone = contact.getNumber();
+        phone = new JLabel(labelPhone);
         phone.setFont(font);
         phone.setHorizontalAlignment(SwingConstants.CENTER);
         phone.setForeground(fontColor);
@@ -33,6 +43,8 @@ public class RowContact extends JPanel {
     }
 
     public void initNameAndGroup(){
+        String labelNameAndGroup=contact.getName()+" ("+contact.getGroup()+")";
+        nameAndGroup=new JLabel(labelNameAndGroup);
         nameAndGroup.setFont(font);
         nameAndGroup.setHorizontalAlignment(SwingConstants.CENTER);
         nameAndGroup.setForeground(fontColor);
@@ -40,13 +52,21 @@ public class RowContact extends JPanel {
     }
 
     public void initProfile(){
+        String labelProfile = contact.getImage();
+        profile = new ImagePane(labelProfile);
         profile.setPreferredSize(new Dimension(70, 60));
         profile.setBackground(bgColor);
         profile.setBorder(BorderFactory.createMatteBorder(0,0,0,1,borderColor));
     }
 
     public  void initContactHandler(){
-        ImagePane fav = new ImagePane("resources/images/star.png");
+        ImagePane fav;
+        if(contact.isFavorite()){
+             fav = new ImagePane("resources/images/yellowStar.png");
+        }
+        else{
+            fav = new ImagePane("resources/images/star.png");
+        }
         ImagePane update = new ImagePane("resources/images/update.png");
         ImagePane delete = new ImagePane("resources/images/suprimer.png");
         fav.setPreferredSize(new Dimension(20,20));
@@ -57,6 +77,7 @@ public class RowContact extends JPanel {
         contactHandler.add(delete);
         contactHandler.setBackground(bgColor);
     }
+
     public  void initThis(){
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createMatteBorder(0,0,1,0,Color.black));
@@ -72,7 +93,8 @@ public class RowContact extends JPanel {
         center.setBackground(bgColor);
     }
 
-    public RowContact(){
+    public RowContact(Contact contact){
+        this.contact = contact;
         initDate();
         initPhone();
         initNameAndGroup();
@@ -81,9 +103,12 @@ public class RowContact extends JPanel {
         initCenter();
         initThis();
 
+        JPanel block_pane = new JPanel(new BorderLayout());
+        block_pane.add(profile,BorderLayout.WEST);
+        block_pane.add(center,BorderLayout.CENTER);
+        block_pane.setBorder(emptyBorder);
+        block_pane.setBackground(bgColor);
 
-
-        add(profile,BorderLayout.WEST);
-        add(center,BorderLayout.CENTER);
+        add(block_pane,BorderLayout.NORTH);
     }
  }

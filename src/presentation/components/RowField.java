@@ -6,20 +6,21 @@ import java.awt.*;
 public class RowField  extends JPanel{
     private JLabel title ;
     private JTextField input;
+    private Designer designer = new Designer();
 
     public RowField(String label, int size){
-        Color bgColor = new Color(135, 206, 231);
-        setBackground(bgColor);
         title = new JLabel(label);
-        title.setBackground(bgColor);
+        title.setForeground(designer.getFontColor());
+        title.setFont(designer.getFont());
         input = new JTextField(size);
-        input.setBackground(bgColor);
         JPanel rowContainer = new JPanel();
         rowContainer.setLayout(new GridLayout(1,2));
         rowContainer.add(title);
         rowContainer.add(input);
+        rowContainer.setBackground(designer.getHeavyBgColor());
         setLayout(new BorderLayout());
         rowContainer.setPreferredSize(new Dimension(54,30));
-        add(rowContainer,BorderLayout.NORTH);
+        rowContainer.setBorder(designer.getBlackBottomMatteBorder());
+        add(rowContainer,BorderLayout.CENTER);
     }
 }
