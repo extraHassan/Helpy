@@ -82,7 +82,7 @@ public class RowContact extends JPanel {
                 if(response==0){
                     contactService.deleteContact(contact.getId());
                     System.out.println("Contact deleted");
-                    container.getContacts().clear();
+                    container.getRowContacts().clear();
                     container.buildPane();
                 }
             }
@@ -128,5 +128,19 @@ public class RowContact extends JPanel {
         add(block_pane,BorderLayout.NORTH);
     }
 
+    public ListPane getContainer() {
+        return container;
+    }
 
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
+
+    public void setContainer(ListPane container) {
+        this.container = container;
+    }
  }
