@@ -12,6 +12,14 @@ public class ListPane extends JPanel {
     private HashMap<Integer,Contact> contacts = new HashMap<>();
     private HashMap<Integer,RowContact> rowContacts = new HashMap<>();
 
+    public HashMap<Integer, Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(HashMap<Integer, Contact> contacts) {
+        this.contacts = contacts;
+    }
+
     public ListPane(){
         setLayout(new BorderLayout());
         setBackground(Color.black);
@@ -21,43 +29,31 @@ public class ListPane extends JPanel {
         contactsToContactsPanes();
         GridLayout gridLayout=new GridLayout(rowContacts.size(),1);
         setLayout(gridLayout);
-        for(int i=0;i<rowContacts.size();i++){
-            add(new RowContact(this,contacts.get(0)));
-        }
+
     }
 
     public void contactsToContactsPanes(){
-        System.out.println(contacts.size());
-        for(int i=0;i<contacts.size();i++){
-            Contact c = contacts.get(i);
-            c.setDateAdded(new Date(System.currentTimeMillis()));
-            c.setFavorite(true);
-            c.setGroup("famille");
-            c.setId(2);
-            c.setImage("resources/images/contact.png");
-            c.setName("zouhir bibi");
-            c.setNumber("0635135348");
-            rowContacts.put(c.getId(),new RowContact(this,c));
+        rowContacts.clear();
+        if(contacts.size()!=0){
+            for(Integer key:contacts.keySet()){
+                Contact contact = contacts.get(key);
+                rowContacts.put(contact.getId(),new RowContact(this,contact));
+            }
+            for(Integer index:rowContacts.keySet()){
+                add(new RowContact(this,contacts.get(index)));
+            }
         }
     }
 
-    public HashMap<Integer, Contact> getContacts() {
-        return contacts;
-    }
-
-    public void setContacts(Vector<Contact> conta) {
-        for(Contact c : conta){
+    public void setContacts(Vector<Contact> listContacts) {
+        System.out.println("listContacts : ==> " + listContacts.size());
+        for(Contact c : listContacts){
             contacts.put(c.getId(),c);
         }
-        this.contacts = contacts;
         buildPane();
     }
 
     public HashMap<Integer, RowContact> getRowContacts() {
         return rowContacts;
-    }
-
-    public void setRowContacts(HashMap<Integer, RowContact> rowContacts) {
-        this.rowContacts = rowContacts;
     }
 }
