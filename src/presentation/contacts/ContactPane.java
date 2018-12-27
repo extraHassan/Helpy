@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ContactPane extends JFrame {
-
     private JTabbedPane jTabbedPane = new JTabbedPane();
     private ListPane listPane = new ListPane();
     private ManageContact manageContact = new ManageContact();
@@ -34,7 +33,7 @@ public class ContactPane extends JFrame {
         block_pane.add(jTabbedPane,BorderLayout.CENTER);
     }
     public static void main(String[] args) {
-	    new ContactPane();
+        new ContactPane();
     }
 	
 	

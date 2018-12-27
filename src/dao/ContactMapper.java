@@ -30,6 +30,7 @@ public class ContactMapper implements Mapper<Contact> {
 	}
 
 	public void delete(int id) {
+		
 	}
 
 	public void update(int id, Contact model) {
