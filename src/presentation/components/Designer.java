@@ -5,7 +5,7 @@ import javax.swing.border.MatteBorder;
 import java.awt.*;
 
 public class Designer {
-
+    private Color opacityBgColor = new Color(250,227,214,100);
     private Font font =new Font("Georgia",Font.ROMAN_BASELINE, 20);
     private Color bgColor = new Color(250,227,214);
     private Color HeavyBgColor = new Color(227,204,189);
@@ -13,13 +13,26 @@ public class Designer {
     private Color borderColor= new Color(227,204,189);
     private EmptyBorder smallMargin = new EmptyBorder(4,2,4,2);
     private MatteBorder BottomMatteBorder = new MatteBorder(0,0,1,0,borderColor);
+    private MatteBorder leftMatteBorder = new MatteBorder(0,2,0,0,borderColor);
     private MatteBorder BlackBottomMatteBorder = new MatteBorder(0,0,1,0,Color.black);
-    private EmptyBorder prayerTimesMargin = new EmptyBorder(100,100,100,50);
+    private EmptyBorder prayerTimesMargin = new EmptyBorder(20,20,20,300);
     private Color lightGreen = new Color(107,186,181);
     private Color heavyGreen = new Color(43,115,121);
 
     public EmptyBorder getPrayerTimesMargin() {
         return prayerTimesMargin;
+    }
+
+    public Color getOpacityBgColor() {
+        return opacityBgColor;
+    }
+
+    public MatteBorder getLeftMatteBorder() {
+        return leftMatteBorder;
+    }
+
+    public void setLeftMatteBorder(MatteBorder leftMatteBorder) {
+        this.leftMatteBorder = leftMatteBorder;
     }
 
     public void setPrayerTimesMargin(EmptyBorder prayerTimesMargin) {
