@@ -1,31 +1,36 @@
 package presentation.medicaments;
 
-import models.Medicament;
-import presentation.components.Designer;
+import services.MedicamentService;
 
 import javax.swing.*;
+import java.awt.*;
 
-public class MedicamentPane {
-    private Medicament medicament;
-    private JLabel name;
-    private Designer designer = new Designer();
+public class MedicamentPane extends JFrame {
 
-    public MedicamentPane(Medicament medicament){
-        this.medicament = medicament;
-        buildPane();
+    private JTabbedPane jTabbedPane = new JTabbedPane();
+    private ListMedicament listPane;
+    private JPanel block_pane = new JPanel(new BorderLayout());
+    private MedicamentService medicamentService = new MedicamentService();
+
+    public MedicamentPane() {
+        listPane = new ListMedicament("resources/images/coeur.png");
+        initBlockPane();
+        setTitle("Contacts");
+        setContentPane(block_pane);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        pack();
+        setVisible(true);
     }
 
-    public void initAll(){
-        name.setText(medicament.getName());
-        name.setHorizontalAlignment(0);
-        name.setFont(designer.getFont());
-        name.setForeground(designer.getFontColor());
-
-
+    public  void initBlockPane(){
+        JPanel listPaneContainer = new JPanel(new BorderLayout());
+        listPaneContainer.add(listPane,BorderLayout.CENTER);
+        JScrollPane jScrollPane = new JScrollPane(listPaneContainer);
+        jTabbedPane.add("Medicaments",jScrollPane);
+        block_pane.add(jTabbedPane,BorderLayout.CENTER);
     }
-
-    public void buildPane(){
-
+    public static void main(String[] args) {
+        new MedicamentPane();
     }
 
 }

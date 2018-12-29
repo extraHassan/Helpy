@@ -7,11 +7,11 @@ import java.awt.*;
 import java.sql.Date;
 import java.util.Vector;
 
-public class ListPane extends JPanel {
+public class ListContact extends JPanel {
     private Vector<Contact> contacts = new Vector<>();
     private Vector<RowContact> rowContacts = new Vector<>();
 
-    public ListPane(){
+    public ListContact(){
         setLayout(new BorderLayout());
         setBackground(Color.black);
     }

@@ -85,7 +85,7 @@ public class RowContact extends JPanel {
     }
 
     public void initCenter(){
-        center=new JPanel(new BorderLayout());
+        center = new JPanel(new BorderLayout());
         center.add(nameAndGroup,BorderLayout.NORTH);
         center.add(phone,BorderLayout.CENTER);
         center.add(contactHandler,BorderLayout.EAST);
