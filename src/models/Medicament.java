@@ -4,45 +4,70 @@ import java.sql.Date;
 import java.sql.Time;
 
 public class Medicament {
-	
-	private String name; 
-	private Date end; 
+	private Long id;
+	private String name;
+	private Date end;
 	private String when;
 	private Time time;
-	private String price; 
-	private String useCase; 
-	private String notificationMessage; 
-	
+	private String useCase;
+	private Double price;
+	private String notificationMessage;
+
 	public Medicament() {
-		notificationMessage=toString(); 
+		notificationMessage = toString();
 	}
-	
-	public Medicament(String name, Date end, String when) {
+
+	public Medicament(Long id, String name, Date end, String when, Time time, String useCase, Double price,
+			String notificationMessage) {
+		super();
+		this.id = id;
 		this.name = name;
 		this.end = end;
 		this.when = when;
+		this.time = time;
+		this.useCase = useCase;
+		this.price = price;
+		this.notificationMessage = notificationMessage;
 	}
-	
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
+
+	public Long getId() {
+		return id;
 	}
-	
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Date getEnd() {
+		return end;
+	}
+
+	public void setEnd(Date end) {
+		this.end = end;
+	}
+
+	public String getWhen() {
+		return when;
+	}
+
+	public void setWhen(String when) {
+		this.when = when;
+	}
+
 	public Time getTime() {
 		return time;
 	}
 
 	public void setTime(Time time) {
 		this.time = time;
-	}
-
-	public String getNotificationMessage() {
-		return notificationMessage;
-	}
-
-	public void setNotificationMessage(String notificationMessage) {
-		this.notificationMessage = notificationMessage;
 	}
 
 	public String getUseCase() {
@@ -53,35 +78,21 @@ public class Medicament {
 		this.useCase = useCase;
 	}
 
-	public String getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
-	
-	public String getName() {
-		return name;
+
+	public String getNotificationMessage() {
+		return notificationMessage;
 	}
-	
-	public void setName(String name) {
-		this.name = name;
+
+	public void setNotificationMessage(String notificationMessage) {
+		this.notificationMessage = notificationMessage;
 	}
-	
-	public Date getEnd() {
-		return end;
-	}
-	
-	public void setEnd(Date end) {
-		this.end = end;
-	}
-	
-	public String getWhen() {
-		return when;
-	}
-	
-	public void setWhen(String when) {
-		this.when = when;
-	} 
+
+
 }

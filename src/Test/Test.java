@@ -2,7 +2,7 @@ package Test;
 
 import java.sql.Date;
 
-import dao.ContactMapper;
+import dao.ContactDaoImpl;
 import models.Contact;
 import presentation.Frame;
 
@@ -18,11 +18,11 @@ public class Test {
 		contact.setDateAdded(new Date(System.currentTimeMillis()));
 		contact.setFavorite(true);
 		contact.setGroup("famille");
-		contact.setId(2);
+		contact.setId(2L);
 		contact.setImage("no image");
 		contact.setName("zouhir bibi");
 		contact.setNumber("0635135348");
-		ContactMapper contactMapper = new ContactMapper();
+		ContactDaoImpl contactMapper = new ContactDaoImpl();
 		contactMapper.insert(contact);
 	}
 	

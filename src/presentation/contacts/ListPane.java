@@ -31,7 +31,7 @@ public class ListPane extends JPanel {
             c.setDateAdded(new Date(System.currentTimeMillis()));
             c.setFavorite(true);
             c.setGroup("famille");
-            c.setId(2);
+            c.setId(2L);
             c.setImage("resources/images/contact.png");
             c.setName("zouhir bibi");
             c.setNumber("0635135348");

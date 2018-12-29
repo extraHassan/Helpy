@@ -3,20 +3,19 @@ package models;
 import java.sql.Date;
 
 public class Contact {
-	private int id; 
-	private String name; 
+	private Long id;
+	private String name;
 	private String group;
-	private String number; 
+	private String number;
 	private String image;
-	private boolean favorite; 
-	private Date dateAdded; 
-	
+	private boolean favorite;
+	private Date dateAdded;
+
 	public Contact() {
-		//here i should initiate the dateAdded;
+		// here i should initiate the dateAdded;
 	}
-	
-	
-	public Contact(int id, String name, String groupe, String number, String image, boolean favorite, Date dateAdded) {
+
+	public Contact(Long id, String name, String groupe, String number, String image, boolean favorite, Date dateAdded) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -27,14 +26,13 @@ public class Contact {
 		this.dateAdded = dateAdded;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 	public Date getDateAdded() {
 		return dateAdded;
@@ -43,7 +41,6 @@ public class Contact {
 	public void setDateAdded(Date dateAdded) {
 		this.dateAdded = dateAdded;
 	}
-
 
 	public boolean isFavorite() {
 		return favorite;
@@ -56,32 +53,32 @@ public class Contact {
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public String getGroup() {
 		return group;
 	}
-	
+
 	public void setGroup(String group) {
 		this.group = group;
 	}
-	
+
 	public String getNumber() {
 		return number;
 	}
-	
+
 	public void setNumber(String number) {
 		this.number = number;
 	}
-	
+
 	public String getImage() {
 		return image;
 	}
-	
+
 	public void setImage(String image) {
 		this.image = image;
-	} 
+	}
 }
