@@ -14,7 +14,7 @@ public class Medicament {
 	private String notificationMessage; 
 	
 	public Medicament() {
-		notificationMessage=toString(); 
+		notificationMessage=toString();
 	}
 	
 	public Medicament(String name, Date end, String when) {
@@ -25,7 +25,6 @@ public class Medicament {
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return super.toString();
 	}
 	

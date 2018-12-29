@@ -1,6 +1,5 @@
 package presentation.prieres;
 
-import javafx.geometry.HorizontalDirection;
 import models.Prayer;
 import presentation.components.Designer;
 import presentation.components.ImagePane;
