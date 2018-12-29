@@ -25,7 +25,7 @@ public class ContactPane extends JFrame {
 	public  void initBlockPane(){
 	   // block_pane.setPreferredSize(new Dimension(350,600));
         JPanel listPaneContainer = new JPanel(new BorderLayout());
-        listPaneContainer.add(listPane,BorderLayout.NORTH);
+        listPaneContainer.add(listPane,BorderLayout.CENTER);
         JScrollPane jScrollPane = new JScrollPane(listPaneContainer);
 
         jTabbedPane.add("Contacts",jScrollPane);
