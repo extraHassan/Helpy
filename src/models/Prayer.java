@@ -54,13 +54,6 @@ public class Prayer {
 		this.frenchName = frenchName;
 	}
 
-	public LocalTime getHour() {
-		return time;
-	}
-
-	public void setHour(LocalTime hour) {
-		this.time = hour;
-	}
 
 	public String getNotificationMessage() {
 		return notificationMessage;

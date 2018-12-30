@@ -111,7 +111,8 @@ public class MedicamentDaoImpl implements MedicamentDao {
 
 	@Override
 	public boolean updateEndDate(int id, LocalDate end) {
-		int a = db.update(DatabaseInfos.MEDICAMENT, id, end);
+		Medicament medicament = new Medicament();
+		int a = db.update(DatabaseInfos.MEDICAMENT, id, medicament.getName(), end);
 		if (a != 0)
 			return true;
 		return false;
@@ -119,7 +120,8 @@ public class MedicamentDaoImpl implements MedicamentDao {
 
 	@Override
 	public boolean updateWhen(int id, String when) {
-		int a = db.update(DatabaseInfos.MEDICAMENT, id, when);
+		Medicament medicament = new Medicament();
+		int a = db.update(DatabaseInfos.MEDICAMENT, id, medicament.getName(),medicament.getEnd(), when);
 		if (a != 0)
 			return true;
 		return false;
@@ -127,7 +129,8 @@ public class MedicamentDaoImpl implements MedicamentDao {
 
 	@Override
 	public boolean updateTime(int id, LocalTime time) {
-		int a = db.update(DatabaseInfos.MEDICAMENT, id, time);
+		Medicament medicament = new Medicament();
+		int a = db.update(DatabaseInfos.MEDICAMENT, id, medicament.getName(),medicament.getEnd(), medicament.getWhen(),time);
 		if (a != 0)
 			return true;
 		return false;
@@ -135,7 +138,9 @@ public class MedicamentDaoImpl implements MedicamentDao {
 
 	@Override
 	public boolean updateUseCase(int id, String useCase) {
-		int a = db.update(DatabaseInfos.MEDICAMENT, id, useCase);
+		Medicament medicament = new Medicament();
+		int a = db.update(DatabaseInfos.MEDICAMENT, id, medicament.getName(),medicament.getEnd(), medicament.getWhen(),medicament.getTime(), useCase);
+
 		if (a != 0)
 			return true;
 		return false;
@@ -143,7 +148,8 @@ public class MedicamentDaoImpl implements MedicamentDao {
 
 	@Override
 	public boolean updatePrice(int id, Double price) {
-		int a = db.update(DatabaseInfos.MEDICAMENT, id, price);
+		Medicament medicament = new Medicament();
+		int a = db.update(DatabaseInfos.MEDICAMENT, id, medicament.getName(),medicament.getEnd(), medicament.getWhen(),medicament.getTime(), medicament.getUseCase(), price);
 		if (a != 0)
 			return true;
 		return false;

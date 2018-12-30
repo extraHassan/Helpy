@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Vector;
 
 import dao.consts.DatabaseInfos;
+import models.Contact;
 import models.Prayer;
 import utils.databases.DataSource;
 import utils.databases.Database;
@@ -88,8 +89,9 @@ public class PrayerDaoImpl implements PrayerDao {
 	}
 
 	@Override
-	public boolean updateTime(int id, String name) {
-		int a = db.update(DatabaseInfos.PRAYER, id, name);
+	public boolean updateTime(int id, String time) {
+		Prayer prayer = select(id);
+		int a = db.update(DatabaseInfos.PRAYER, id,prayer.getFrenchName(), prayer.getArabicName(), time, prayer.getNotificationMessage());
 		if (a != 0)
 			return true;
 		return false;

@@ -9,15 +9,19 @@ import dao.AgendaDaoImpl;
 import dao.ContactDaoImpl;
 import dao.MedicamentDao;
 import dao.MedicamentDaoImpl;
+import dao.PrayerDao;
+import dao.PrayerDaoImpl;
 import models.Agenda;
 import models.Contact;
 import models.Medicament;
+import models.Prayer;
+import services.MailService;
 
 
 public class Test {
 
 	public Test() {
-		exp03();
+		exp02();
 	}
 
 	void exp01() {
@@ -41,6 +45,8 @@ public class Test {
 		System.out.println(contactMapper.liste().get(0).getId());
 	}
 	
+	
+	
 	void exp03() {
 		Medicament medicament = new Medicament();
 		medicament.setEnd(LocalDate.of(2018, 02, 5));
@@ -63,18 +69,19 @@ public class Test {
 	}
 
 	void exp02() {
-		Agenda agenda = new Agenda();
+		PrayerDao pd = new PrayerDaoImpl();
+		Prayer p = new Prayer();
+		p.setArabicName("dohr");
+		p.setFrenchName("dooohr");
+		p.setTime(LocalTime.now());
+		p.setNotificationMessage("sdahfasdklh a hdsjkfh asd fhaef kasjdh fjkasdhf jkasdhf");
 		
-		agenda.setDate(LocalDate.now());
-		agenda.setDescription("ashdsdjflasdfjh");
-		agenda.setEvent("sortie");
-		agenda.setNotificationMessage("hola amigo");
-		agenda.setTime(LocalTime.now());
-		
-		AgendaDao agendaMapper = new AgendaDaoImpl();
-		
-		//System.out.println(agendaMapper.insert(agenda));contactMapper.liste()
-		//System.out.println(agendaMapper.select(1).getTime());
+		System.out.println(pd.insert(p));
+	}
+	
+	void exp04() {
+		MailService ms = new MailService();
+		ms.sendEmail("hassounnambz@gmail.com", "6*15@hassan2018", "elmzabi.hassan18@gmail.com","test d service","slaaaa w slaaaam 3la rassolah ewa jme3 rassk 3liya");
 	}
 
 	public static void main(String[] args) {
