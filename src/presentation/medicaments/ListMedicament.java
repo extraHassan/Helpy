@@ -2,7 +2,6 @@ package presentation.medicaments;
 
 import models.Medicament;
 import presentation.components.Designer;
-import presentation.components.ImagePane;
 import services.MedicamentService;
 
 import javax.swing.*;
@@ -25,15 +24,23 @@ public class ListMedicament extends JPanel {
         setLayout(new BorderLayout());
         block_page=new JPanel();
         block_page.setLayout(new GridLayout(medicamentPanes.size(),1,4,4));
-        for (RowMedicament mp : medicamentPanes){
-            mp.setBorder(designer.getBlackBottomMatteBorder());
-
-            JPanel pane = new JPanel(new BorderLayout());
-            pane.setBorder(BorderFactory.createEmptyBorder(25,25,25,25));
-            pane.setOpaque(false);
-            pane.add(mp,BorderLayout.CENTER);
-            block_page.add(pane);
+        if(medicamentPanes.size()!=0){
+            for (RowMedicament mp : medicamentPanes){
+                mp.setBorder(designer.getBlackBottomMatteBorder());
+                JPanel pane = new JPanel(new BorderLayout());
+                pane.setBorder(BorderFactory.createEmptyBorder(25,25,25,25));
+                pane.setOpaque(false);
+                pane.add(mp,BorderLayout.CENTER);
+                block_page.add(pane);
+            }
+        }else {
+            JLabel emptydatabase = new JLabel();
+            emptydatabase.setIcon(new ImageIcon("resources/images/database.png"));
+            emptydatabase.setHorizontalAlignment(0);
+            emptydatabase.setVerticalAlignment(0);
+            block_page.add(emptydatabase);
         }
+
         block_page.setOpaque(false);
         add(block_page, BorderLayout.CENTER);
         setOpaque(false);
@@ -53,9 +60,12 @@ public class ListMedicament extends JPanel {
     public void convertMedicamentsToMedicamentsPane(){
         medicaments = medicamentService.getMedicaments();
         medicamentPanes.clear();
+
         for (Integer key: medicaments.keySet()){
             Medicament med = medicaments.get(key);
             medicamentPanes.add(new RowMedicament(this,med));
         }
+
+
     }
 }

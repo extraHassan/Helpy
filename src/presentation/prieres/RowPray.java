@@ -1,7 +1,5 @@
 package presentation.prieres;
 
-import javafx.scene.control.TextInputDialog;
-import jdk.nashorn.internal.scripts.JO;
 import models.Prayer;
 import presentation.components.Designer;
 
@@ -9,9 +7,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseWheelEvent;
-import java.sql.Time;
 
 public class RowPray extends  JPanel  {
 
@@ -67,7 +62,7 @@ public class RowPray extends  JPanel  {
                     String newTime = JOptionPane.showInputDialog(null,"vous voulez changer l'heure ? ",prayer.getFrenchName(),1);
                     if(newTime!=null && !newTime.isEmpty()){
                         //here the service must change the date
-                        prayer.setHour(new Time(15,12,3));
+                        //prayer.setHour(new Time(15,12,3));
                         time.setText(prayer.getTime().toString());
                     }
                     super.mouseClicked(e);

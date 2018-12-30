@@ -23,5 +23,7 @@
       </library>
     </orderEntry>
     <orderEntry type="inheritedJdk" />
+    <orderEntry type="library" name="javax.mail-api-1.4.7" level="project" />
+    <orderEntry type="library" name="jdbc" level="project" />
   </component>
 </module>

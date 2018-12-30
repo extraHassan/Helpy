@@ -1,7 +1,5 @@
 package presentation.medicaments;
 
-import com.sun.xml.internal.ws.wsdl.writer.document.soap.BodyType;
-import jdk.nashorn.internal.scripts.JO;
 import models.Medicament;
 import presentation.components.Designer;
 import presentation.components.ImagePane;
@@ -13,7 +11,6 @@ import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.rmi.registry.LocateRegistry;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -79,13 +76,13 @@ public class AddMedicamentPane extends JFrame {
                             med.setWhen(rowFields[2].getInput().getText());
                             med.setTime(time);
                             med.setEnd(date);
-                            med.setPrice(rowFields[5].getInput().getText());
+                            med.setPrice(Double.parseDouble(rowFields[5].getInput().getText()));
                             medicamentService.addMedicament(med);
                             JOptionPane.showMessageDialog(null,"Médicament bien ajouté","info", 1);
 
                         }catch (Exception i){
                             System.out.println(i.getMessage());
-                            JOptionPane.showMessageDialog(null,"le format de la date et de l'heure n'est pas correcte !");
+                            JOptionPane.showMessageDialog(null,"le format de la date ou de prix ou de l'heure n'est pas correcte !");
                         }
                     }
                 }
