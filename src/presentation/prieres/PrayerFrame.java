@@ -8,7 +8,7 @@ import services.PrayerService;
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
-import java.util.Vector;
+import java.util.List;
 
 public class PrayerFrame extends JFrame {
 
@@ -19,7 +19,8 @@ public class PrayerFrame extends JFrame {
     private Designer designer = new Designer();
 
     public void initPrayers(){
-        Vector<Prayer> prayers = prayerService.findAll();
+        List<Prayer> prayers = prayerService.findAll();
+
         for(Prayer prayer:prayers){
             this.prayerHashMap.put(prayer.getId(),prayer);
         }

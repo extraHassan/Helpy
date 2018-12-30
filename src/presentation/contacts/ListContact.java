@@ -4,11 +4,11 @@ import models.Contact;
 
 import javax.swing.*;
 import java.awt.*;
-import java.time.LocalDate;
+import java.util.List;
 import java.util.Vector;
 
 public class ListContact extends JPanel {
-    private Vector<Contact> contacts = new Vector<>();
+    private List<Contact> contacts = new Vector<>();
     private Vector<RowContact> rowContacts = new Vector<>();
 
     public ListContact(){
@@ -28,22 +28,13 @@ public class ListContact extends JPanel {
     public void contactsToContactsPanes(){
         System.out.println(contacts.size());
         for (Contact c : contacts){
-            c.setDateAdded(LocalDate.now());
-            c.setFavorite(true);
-            c.setGroup("famille");
-            c.setId(2);
-            c.setImage("resources/images/contact.png");
-            c.setName("zouhir bibi");
-            c.setNumber("0635135348");
             rowContacts.add(new RowContact(c));
         }
     }
 
-    public Vector<Contact> getContacts() {
-        return contacts;
-    }
 
-    public void setContacts(Vector<Contact> contacts) {
+
+    public void setContacts(List<Contact> contacts) {
         this.contacts = contacts;
         buildPane();
     }

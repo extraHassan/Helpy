@@ -7,6 +7,7 @@ import services.MedicamentService;
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Vector;
 
 public class ListMedicament extends JPanel {
@@ -47,7 +48,7 @@ public class ListMedicament extends JPanel {
     }
 
     public void deleteRowMedicament(int id){
-        medicamentService.deleteMedicament(id);
+        medicamentService.delete(id);
         block_page.removeAll();
         removeAll();
         block_page.revalidate();
@@ -58,14 +59,15 @@ public class ListMedicament extends JPanel {
     }
 
     public void convertMedicamentsToMedicamentsPane(){
-        medicaments = medicamentService.getMedicaments();
+        List<Medicament> meds = medicamentService.findAll();
+        for (Medicament m:meds){
+            medicaments.put(m.getId(),m);
+        }
         medicamentPanes.clear();
 
         for (Integer key: medicaments.keySet()){
             Medicament med = medicaments.get(key);
             medicamentPanes.add(new RowMedicament(this,med));
         }
-
-
     }
 }

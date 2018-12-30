@@ -13,7 +13,7 @@ public class ContactPane extends JFrame {
     private ContactService contactService = new ContactService();
 
 	public ContactPane() {
-	    listPane.setContacts(contactService.listContacts());
+	    listPane.setContacts(contactService.findAll());
         initBlockPane();
         setTitle("Contacts");
         setContentPane(block_pane);

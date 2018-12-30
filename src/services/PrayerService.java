@@ -1,29 +1,40 @@
 package services;
 
-import models.Prayer;
+import java.util.List;
 
-import java.sql.Time;
-import java.util.Vector;
+import dao.PrayerDao;
+import dao.PrayerDaoImpl;
+import models.Prayer;
 
 public class PrayerService {
 
-    public Vector<Prayer> findAll(){
-        Vector<Prayer> prayers = new Vector<>();
-//        prayers.add(new Prayer(1,"FAJR","Ø§Ù„ØµØ¨Ø­(Ø§Ù„Ù�Ø¬Ø±)",new Time(05,30,33),"it " +
-//                "is show time for " +
-//                "FAJR"));
-//        prayers.add(new Prayer(2,"DOHR","Ø§Ù„Ø¸Ù‡Ø±",new Time(12,15,33),"it " +
-//                "is show time for " +
-//                "DOHR"));
-//        prayers.add(new Prayer(3,"ASR","Ø§Ù„Ø¹ØµØ±",new Time(16,00,33),"it " +
-//                "is show time for " +
-//                "ASR"));
-//        prayers.add(new Prayer(4,"MAGHRIB","Ø§Ù„Ù…ØºØ±Ø¨",new Time(17,30,33),"it " +
-//                "is show time for " +
-//                "MAGHRIB"));
-//        prayers.add(new Prayer(5,"ICHAA","Ø§Ù„Ø¹Ø´Ø§Ø¡",new Time(20,30,33),"it " +
-//                "is show time for " +
-//                "ICHAA"));
-        return prayers;
-    }
+	private PrayerDao prayerDao;
+
+	public PrayerService() {
+		prayerDao = new PrayerDaoImpl();
+	}
+
+	public boolean addPrayer(Prayer prayer) {
+		return prayerDao.insert(prayer);
+	}
+
+	public Prayer findById(int id) {
+		return prayerDao.select(id);
+	}
+
+	public boolean delete(int id) {
+		return prayerDao.delete(id);
+	}
+
+	public List<Prayer> findAll() {
+		return prayerDao.liste();
+	}
+
+	public boolean update(int id, Prayer model) {
+		return prayerDao.update(id, model);
+	}
+
+	public boolean updateTime(int id, String group) {
+		return prayerDao.updateTime(id, group);
+	}
 }
