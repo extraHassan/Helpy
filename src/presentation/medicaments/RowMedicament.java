@@ -59,7 +59,10 @@ public class RowMedicament extends JPanel {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                bigContainer.deleteRowMedicament(medicament.getId());
+                int response = JOptionPane.showConfirmDialog(null,"vous voulez vraiment supprimer ce médicament ? ");
+                if(response==0){
+                    bigContainer.deleteRowMedicament(medicament.getId());
+                }
             }
         });
 

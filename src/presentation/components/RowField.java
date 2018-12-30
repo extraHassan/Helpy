@@ -7,13 +7,30 @@ public class RowField  extends JPanel{
     private JLabel title ;
     private JTextField input;
     private Designer designer = new Designer();
+    private JPanel rowContainer ;
+    @Override
+    public void setName(String name) {
+        title.setText(name);
+    }
+
+    public JLabel getTitle() {
+        return title;
+    }
+
+    public JTextField getInput() {
+        return input;
+    }
+
+    public JPanel getRowContainer() {
+        return rowContainer;
+    }
 
     public RowField(String label, int size){
         title = new JLabel(label);
         title.setForeground(designer.getFontColor());
         title.setFont(designer.getFont());
         input = new JTextField(size);
-        JPanel rowContainer = new JPanel();
+        rowContainer = new JPanel();
         rowContainer.setLayout(new GridLayout(1,2));
         rowContainer.add(title);
         rowContainer.add(input);

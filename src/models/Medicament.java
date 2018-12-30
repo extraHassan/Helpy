@@ -2,13 +2,16 @@ package models;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Medicament {
+
 	private int id;
 	private String name; 
-	private Date end; 
+	private LocalDate end;
 	private String when;
-	private Time time;
+	private LocalTime time;
 	private String price; 
 	private String useCase; 
 	private String notificationMessage; 
@@ -16,15 +19,19 @@ public class Medicament {
 	public Medicament() {
 		notificationMessage=toString();
 	}
-	
-	public Medicament(int id,String name, Date end, String when) {
-		this.id=id;
-		this.name = name;
+
+
+
+
+	public void setEnd(LocalDate end) {
 		this.end = end;
-		this.when = when;
 	}
 
-    public int getId() {
+	public void setTime(LocalTime time) {
+		this.time = time;
+	}
+
+	public int getId() {
         return id;
     }
 
@@ -34,16 +41,12 @@ public class Medicament {
 
     @Override
 	public String toString() {
-		return super.toString();
+	    String info = "id :" + id + " name : "+name + " date de fin : "+end+ " when : "+ when + " time: "+time
+                +" price : "+price + " usecase: "+useCase;
+	    return info;
 	}
 	
-	public Time getTime() {
-		return time;
-	}
 
-	public void setTime(Time time) {
-		this.time = time;
-	}
 
 	public String getNotificationMessage() {
 		return notificationMessage;
@@ -77,19 +80,13 @@ public class Medicament {
 		this.name = name;
 	}
 	
-	public Date getEnd() {
-		return end;
-	}
-	
-	public void setEnd(Date end) {
-		this.end = end;
-	}
-	
 	public String getWhen() {
 		return when;
 	}
 	
 	public void setWhen(String when) {
 		this.when = when;
-	} 
+	}
+
+
 }

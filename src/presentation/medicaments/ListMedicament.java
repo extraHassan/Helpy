@@ -7,11 +7,12 @@ import services.MedicamentService;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
 import java.util.Vector;
 
 public class ListMedicament extends JPanel {
     private MedicamentService medicamentService = new MedicamentService();
-    private Vector<Medicament> medicaments;
+    private HashMap<Integer,Medicament> medicaments;
     private Vector<RowMedicament> medicamentPanes = new Vector<>();
     private Designer designer = new Designer();
     private JPanel block_page = new JPanel();
@@ -50,9 +51,10 @@ public class ListMedicament extends JPanel {
     }
 
     public void convertMedicamentsToMedicamentsPane(){
-        medicaments = medicamentService.listContacts();
+        medicaments = medicamentService.getMedicaments();
         medicamentPanes.clear();
-        for (Medicament med : medicaments){
+        for (Integer key: medicaments.keySet()){
+            Medicament med = medicaments.get(key);
             medicamentPanes.add(new RowMedicament(this,med));
         }
     }
