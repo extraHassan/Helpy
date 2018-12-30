@@ -6,12 +6,12 @@ import java.awt.*;
 
 public class MedicamentPane extends JFrame {
 
-    private ListMedicament listPane = new ListMedicament();;
+    private ListMedicament listPane  = new ListMedicament();
     private ImagePane block_pane ;
 
     public MedicamentPane() {
         initBlockPane();
-        setTitle("Contacts");
+        setTitle("Médicaments");
         setContentPane(block_pane);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
@@ -26,7 +26,9 @@ public class MedicamentPane extends JFrame {
         block_pane = new ImagePane("resources/images/coeur.png");
         block_pane.setLayout(new BorderLayout());
         block_pane.add(jScrollPane,BorderLayout.CENTER);
+        block_pane.setOpaque(false);
     }
+
     public static void main(String[] args) {
         new MedicamentPane();
     }

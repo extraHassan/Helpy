@@ -5,14 +5,22 @@ import models.Medicament;
 import java.util.Vector;
 
 public class MedicamentService {
-    public Vector<Medicament> listContacts(){
-        Vector<Medicament> medicaments = new Vector<>();
+    private Vector<Medicament> medicaments = new Vector<>();
 
-        for (int i=0;i<10;i++){
+    public MedicamentService(){
+        for (int i=0;i<2;i++){
             Medicament medicament = new Medicament();
-            medicament.setName("doliprine");
+            medicament.setId(i);
+            medicament.setName("extraHassan");
             medicaments.add(medicament);
         }
+    }
+
+    public Vector<Medicament> listContacts(){
         return medicaments;
+    }
+
+    public void deleteMedicament(int id){
+        medicaments.remove(id);
     }
 }

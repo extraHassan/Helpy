@@ -13,9 +13,11 @@ public class RowMedicament extends JPanel {
 
     private Medicament medicament;
     private Designer designer = new Designer();
+    private ListMedicament bigContainer;
 
-    public RowMedicament(Medicament medicament){
+    public RowMedicament(ListMedicament bigContainer, Medicament medicament){
         this.medicament = medicament;
+        this.bigContainer=bigContainer;
         buildPane();
     }
 
@@ -53,6 +55,11 @@ public class RowMedicament extends JPanel {
 
             @Override
             public void mouseExited(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                bigContainer.deleteRowMedicament(medicament.getId());
             }
         });
 
@@ -130,17 +137,5 @@ public class RowMedicament extends JPanel {
         setBackground(designer.getOpacityBgColor());
         setPreferredSize(new Dimension(500,300));
     }
-
-    public static void main(String[] args) {
-        Medicament medicament = new Medicament();
-        medicament.setName("doliprine");
-
-        JFrame frame = new JFrame("medicament Pane");
-        frame.setContentPane(new RowMedicament(medicament));
-        frame.pack();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-    }
-
 
 }

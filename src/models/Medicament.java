@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.sql.Time;
 
 public class Medicament {
-	
+	private int id;
 	private String name; 
 	private Date end; 
 	private String when;
@@ -17,13 +17,22 @@ public class Medicament {
 		notificationMessage=toString();
 	}
 	
-	public Medicament(String name, Date end, String when) {
+	public Medicament(int id,String name, Date end, String when) {
+		this.id=id;
 		this.name = name;
 		this.end = end;
 		this.when = when;
 	}
-	
-	@Override
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
 	public String toString() {
 		return super.toString();
 	}
