@@ -177,7 +177,8 @@ public class Database {
 
 		try {
 			Statement sql = db.createStatement();
-			return sql.executeUpdate(sb.toString());
+            System.out.println("sql query : " + sb.toString());
+            return sql.executeUpdate(sb.toString());
 		} catch (Exception e) {
 			System.out.println("erreur + " + e.getMessage());
 			return 0;
