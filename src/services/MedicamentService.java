@@ -1,59 +1,32 @@
 package services;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.List;
-
-import dao.MedicamentDao;
-import dao.MedicamentDaoImpl;
 import models.Medicament;
 
+import java.util.HashMap;
+import java.util.Vector;
+
 public class MedicamentService {
-	private MedicamentDao medicamentDao;
+    private HashMap<Integer,Medicament> medicaments = new HashMap<>();
 
-	public MedicamentService() {
-		medicamentDao = new MedicamentDaoImpl();
-	}
+    public MedicamentService(){
+        for (int i=0;i<3;i++){
+            Medicament medicament = new Medicament();
+            medicament.setId(i);
+            medicament.setName("extraHassan");
+            medicaments.put(medicament.getId(),medicament);
+        }
+    }
 
-	public boolean addMedicament(Medicament contact) {
-		return medicamentDao.insert(contact);
-	}
+    public void addMedicament(Medicament med){
+        medicaments.put(med.getId(),med);
+        System.out.println(med.toString());
+    }
 
-	public Medicament findById(int id) {
-		return medicamentDao.select(id);
-	}
+    public HashMap<Integer, Medicament> getMedicaments() {
+        return medicaments;
+    }
 
-	public boolean delete(int id) {
-		return medicamentDao.delete(id);
-	}
-
-	public List<Medicament> findAll() {
-		return medicamentDao.liste();
-	}
-
-	public boolean updateName(int id, String name) {
-		return medicamentDao.updateName(id, name);
-	}
-
-	public boolean updateEndDate(int id, LocalDate end) {
-		return medicamentDao.updateEndDate(id, end);
-	}
-
-	public boolean updateWhen(int id, String when) {
-		return medicamentDao.updateWhen(id, when);
-	}
-
-	public boolean updateTime(int id, LocalTime time) {
-		return medicamentDao.updateTime(id, time);
-	}
-
-	public boolean updateUseCase(int id, String useCase) {
-		return medicamentDao.updateUseCase(id, useCase);
-	}
-
-	public boolean updatePrice(int id, Double price) {
-		return medicamentDao.updatePrice(id, price);
-	}
-
-
+    public void deleteMedicament(int id){
+        medicaments.remove(id);
+    }
 }
