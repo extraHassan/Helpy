@@ -12,7 +12,7 @@ import java.util.Vector;
 
 public class PrayerFrame extends JFrame {
 
-    private ImagePane block_pane = new ImagePane("resources/images/mosquee.jpg");
+    private JPanel block_pane = new JPanel();
     private HashMap<Integer, Prayer> prayerHashMap = new HashMap<>();
     private HashMap<Integer,RowPray> rowPrayHashMap = new HashMap<>();
     private PrayerService prayerService=new PrayerService();
@@ -35,21 +35,18 @@ public class PrayerFrame extends JFrame {
     }
 
     public void initBlockPane(){
-        JPanel rowsContainer = new JPanel(new GridLayout(5,1));
-        rowsContainer.setBorder(designer.getPrayerTimesMargin());
+        JPanel rowsContainer = new JPanel(new GridLayout(5,1,1,6));
         rowsContainer.setOpaque(false);
         initRowsPrayer();
         for(Integer rowPaneKey:rowPrayHashMap.keySet()){
             rowsContainer.add(rowPrayHashMap.get(rowPaneKey));
         }
         System.out.println("blockPanes size ===> "+rowsContainer.getComponents().length);
-        ImagePane aya=new ImagePane("resources/images/aya.png");
-        aya.setPreferredSize(new Dimension(80,160));
-        aya.setOpaque(false);
-        block_pane.setLayout(new BorderLayout());
-        block_pane.add(rowsContainer,BorderLayout.EAST);
-        block_pane.add(aya,BorderLayout.SOUTH);
 
+        block_pane.setLayout(new BorderLayout());
+        block_pane.setOpaque(false);
+        block_pane.add(rowsContainer,BorderLayout.CENTER);
+        block_pane.setBorder(BorderFactory.createEmptyBorder(120,2,40,60));
     }
 
     public void initFrame(){
@@ -62,7 +59,15 @@ public class PrayerFrame extends JFrame {
 
     public PrayerFrame(){
         initBlockPane();
-        setContentPane(block_pane);
+
+        ImagePane block_pane_Container=new ImagePane("resources/images/masjid.png");
+        block_pane_Container.setLayout(new BorderLayout());
+        block_pane_Container.setPreferredSize(new Dimension(400,600));
+
+        block_pane_Container.add(block_pane,BorderLayout.CENTER);
+
+
+        setContentPane(block_pane_Container);
         initFrame();
     }
 

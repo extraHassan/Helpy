@@ -1,14 +1,15 @@
 package models;
 
-import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Medicament {
-	private Long id;
+	private Integer id;
 	private String name;
-	private Date end;
+	private LocalDate end;
 	private String when;
-	private Time time;
+	private LocalTime time;
 	private String useCase;
 	private Double price;
 	private String notificationMessage;
@@ -17,7 +18,7 @@ public class Medicament {
 		notificationMessage = toString();
 	}
 
-	public Medicament(Long id, String name, Date end, String when, Time time, String useCase, Double price,
+	public Medicament(Integer id, String name, LocalDate end, String when, LocalTime time, String useCase, Double price,
 			String notificationMessage) {
 		super();
 		this.id = id;
@@ -30,11 +31,11 @@ public class Medicament {
 		this.notificationMessage = notificationMessage;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -46,11 +47,11 @@ public class Medicament {
 		this.name = name;
 	}
 
-	public Date getEnd() {
+	public LocalDate getEnd() {
 		return end;
 	}
 
-	public void setEnd(Date end) {
+	public void setEnd(LocalDate end) {
 		this.end = end;
 	}
 
@@ -62,11 +63,11 @@ public class Medicament {
 		this.when = when;
 	}
 
-	public Time getTime() {
+	public LocalTime getTime() {
 		return time;
 	}
 
-	public void setTime(Time time) {
+	public void setTime(LocalTime time) {
 		this.time = time;
 	}
 
@@ -93,6 +94,5 @@ public class Medicament {
 	public void setNotificationMessage(String notificationMessage) {
 		this.notificationMessage = notificationMessage;
 	}
-
 
 }

@@ -1,0 +1,7 @@
+bin/
+.classpath
+.project
+bin/*
+.settings/org.eclipse.core.resources.prefs
+.settings/
+.ignore

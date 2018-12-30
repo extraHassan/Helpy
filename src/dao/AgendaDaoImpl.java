@@ -1,7 +1,12 @@
 package dao;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Vector;
 
+import dao.consts.DatabaseInfos;
 import models.Agenda;
 import utils.databases.DataSource;
 import utils.databases.Database;
@@ -13,18 +18,28 @@ public class AgendaDaoImpl implements AgendaDao {
 	private Database db;
 
 	public AgendaDaoImpl() {
-		ds = new MySQLDatabase("forever");
-		ds.setUser("root");
-		ds.setPassword("root");
+		ds = new MySQLDatabase(DatabaseInfos.DATABASE);
+		ds.setUser(DatabaseInfos.USER);
+		ds.setPassword(DatabaseInfos.PASSWORD);
 		db = new Database(ds);
 	}
 
 	public Agenda select(int id) {
 		Agenda agenda = new Agenda();
-		String[][] data = db.select("Agenda", "id", id);
+		String[][] data = db.select(DatabaseInfos.AGENDA, "id", id);
 		for (int i = 1; i < data.length; i++) {
-			for (int j = 0; j < data[i].length; i++) {
+			for (int j = 0; j < data[i].length; j++) {
+				// System.out.println(data[i][j]);
 				agenda.setId(Integer.parseInt(data[i][j]));
+				agenda.setEvent(data[i][++j]);
+				agenda.setDescription(data[i][++j]);
+				agenda.setNotificationMessage(data[i][++j]);
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				LocalDate dateTime = LocalDate.parse(data[i][++j], formatter);
+				agenda.setDate(dateTime);
+				formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+				LocalTime time = LocalTime.parse(data[i][++j], formatter);
+				agenda.setTime(time);
 
 			}
 		}
@@ -33,33 +48,75 @@ public class AgendaDaoImpl implements AgendaDao {
 
 	@Override
 	public boolean insert(Agenda model) {
-		// TODO Auto-generated method stub
+		int a = db.insert(model);
+		if (a != 0)
+			return true;
 		return false;
 	}
 
 	@Override
 	public boolean delete(int id) {
-		// TODO Auto-generated method stub
+		int a = db.delete(DatabaseInfos.AGENDA, "id", id);
+		if (a != 0)
+			return true;
 		return false;
 	}
 
 	@Override
 	public boolean update(int id, Agenda model) {
-		// TODO Auto-generated method stub
+		int a = db.update(DatabaseInfos.CONTACT, model.getId(), model.getEvent(), model.getDescription(),
+				model.getNotificationMessage(), model.getDate(), model.getTime());
+		if (a != 0)
+			return true;
 		return false;
 	}
 
 	@Override
 	public List<Agenda> liste() {
-		// TODO Auto-generated method stub
-		return null;
+		String[][] data = db.select(DatabaseInfos.CONTACT);
+		List<Agenda> agendas = new Vector<>();
+		Agenda agenda = new Agenda();
+		for (int i = 1; i < data.length; i++) {
+			for (int j = 0; j < data[i].length;) {
+				agenda.setId(Integer.parseInt(data[i][j]));
+				agenda.setEvent(data[i][++j]);
+				agenda.setDescription(data[i][++j]);
+				agenda.setNotificationMessage(data[i][++j]);
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				LocalDate dateTime = LocalDate.parse(data[i][++j], formatter);
+				agenda.setDate(dateTime);
+				formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+				LocalTime time = LocalTime.parse(data[i][++j], formatter);
+				agenda.setTime(time);
+				agendas.add(agenda);
+			}
+		}
+		return agendas;
+
 	}
 
 	@Override
 	public Agenda selectByEvent(String event) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		Agenda agenda = new Agenda();
+		String[][] data = db.select(DatabaseInfos.AGENDA, "event", event);
+		for (int i = 1; i < data.length; i++) {
+			for (int j = 0; j < data[i].length; j++) {
+				// System.out.println(data[i][j]);
+				agenda.setId(Integer.parseInt(data[i][j]));
+				agenda.setEvent(data[i][++j]);
+				agenda.setDescription(data[i][++j]);
+				agenda.setNotificationMessage(data[i][++j]);
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				LocalDate dateTime = LocalDate.parse(data[i][++j], formatter);
+				agenda.setDate(dateTime);
+				formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+				LocalTime time = LocalTime.parse(data[i][++j], formatter);
+				agenda.setTime(time);
 
+			}
+		}
+		return agenda;
+
+	}
 
 }

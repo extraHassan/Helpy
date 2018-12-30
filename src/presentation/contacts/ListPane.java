@@ -4,7 +4,7 @@ import models.Contact;
 
 import javax.swing.*;
 import java.awt.*;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Vector;
 
 public class ListPane extends JPanel {
@@ -28,10 +28,10 @@ public class ListPane extends JPanel {
     public void contactsToContactsPanes(){
         System.out.println(contacts.size());
         for (Contact c : contacts){
-            c.setDateAdded(new Date(System.currentTimeMillis()));
+            c.setDateAdded(LocalDate.now());
             c.setFavorite(true);
             c.setGroup("famille");
-            c.setId(2L);
+            c.setId(2);
             c.setImage("resources/images/contact.png");
             c.setName("zouhir bibi");
             c.setNumber("0635135348");

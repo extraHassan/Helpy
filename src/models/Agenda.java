@@ -1,21 +1,22 @@
 package models;
 
-import java.sql.Date;
-import java.sql.Time;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Agenda {
 	private Integer id;
 	private String event;
 	private String description;
 	private String notificationMessage;
-	private Date date;
-	private Time time;
+	private LocalDate date;
+	private LocalTime time;
 
 	public Agenda() {
 		notificationMessage = toString();
 	}
 
-	public Agenda(Integer id, String event, String description, String notificationMessage, Date date, Time time) {
+	public Agenda(Integer id, String event, String description, String notificationMessage, LocalDate date, LocalTime time) {
 		super();
 		this.id = id;
 		this.event = event;
@@ -61,19 +62,19 @@ public class Agenda {
 		this.notificationMessage = notificationMessage;
 	}
 
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
-	public Time getTime() {
+	public LocalTime getTime() {
 		return time;
 	}
 
-	public void setTime(Time time) {
+	public void setTime(LocalTime time) {
 		this.time = time;
 	}
 }

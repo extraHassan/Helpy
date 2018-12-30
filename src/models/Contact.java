@@ -1,21 +1,22 @@
 package models;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Contact {
-	private Long id;
+	private Integer id;
 	private String name;
 	private String group;
 	private String number;
 	private String image;
 	private boolean favorite;
-	private Date dateAdded;
+	private LocalDate dateAdded;
 
 	public Contact() {
 		// here i should initiate the dateAdded;
 	}
 
-	public Contact(Long id, String name, String groupe, String number, String image, boolean favorite, Date dateAdded) {
+	public Contact(Integer id, String name, String groupe, String number, String image, boolean favorite,
+			LocalDate dateAdded) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -26,19 +27,19 @@ public class Contact {
 		this.dateAdded = dateAdded;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public Date getDateAdded() {
+	public LocalDate getDateAdded() {
 		return dateAdded;
 	}
 
-	public void setDateAdded(Date dateAdded) {
+	public void setDateAdded(LocalDate dateAdded) {
 		this.dateAdded = dateAdded;
 	}
 

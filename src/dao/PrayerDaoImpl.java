@@ -2,6 +2,7 @@ package dao;
 
 import java.util.List;
 
+import dao.consts.DatabaseInfos;
 import models.Prayer;
 import utils.databases.DataSource;
 import utils.databases.Database;
@@ -13,9 +14,9 @@ public class PrayerDaoImpl implements PrayerDao {
 	private Database db;
 
 	public PrayerDaoImpl() {
-		ds = new MySQLDatabase("forever");
-		ds.setUser("root");
-		ds.setPassword("root");
+		ds = new MySQLDatabase(DatabaseInfos.DATABASE);
+		ds.setUser(DatabaseInfos.USER);
+		ds.setPassword(DatabaseInfos.PASSWORD);
 		db = new Database(ds);
 	}
 

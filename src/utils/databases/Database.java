@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Iterator;
 import java.util.Map;
@@ -103,7 +104,7 @@ public class Database {
 		StringBuffer sb = new StringBuffer("INSERT INTO " + delimit(tableName) + " VALUES('" + row[0] + "'");
 
 		for (int i = 1; i < row.length; i++) {
-			if (row[i].equals("true") || row[i].equals("false")) {
+			if (row[i].equals(true) || row[i].equals(false)) {
 				sb.append(", " + row[i] + "");
 			} else {
 				sb.append(", '" + row[i] + "'");
@@ -157,11 +158,19 @@ public class Database {
 	public int update(String tableName, Object... row) {
 		StringBuffer sb = new StringBuffer("UPDATE " + delimit(tableName));
 		String f[] = fieldNames(tableName);
-
-		sb.append(" SET " + delimit(f[1]) + " = '" + row[1] + "'");
+		if (row[1].equals(true) || row[1].equals(false)) {
+			sb.append(" SET " + delimit(f[1]) + " = " + row[1] + " ");
+		} else {
+			sb.append(" SET " + delimit(f[1]) + " = '" + row[1] + "'");
+		}
 
 		for (int i = 2; i < row.length; i++) {
-			sb.append(", " + delimit(f[i]) + " = '" + row[i] + "'");
+			if (row[i].equals(true) || row[i].equals(false)) {
+				sb.append(", " + delimit(f[i]) + " = " + row[i] + " ");
+			} else {
+				sb.append(", " + delimit(f[i]) + " = '" + row[i] + "'");
+			}
+
 		}
 
 		sb.append("where " + delimit(f[0]) + " = " + row[0]);
@@ -174,6 +183,16 @@ public class Database {
 			return 0;
 		}
 
+	}
+
+	public int delete(String tableName, String columnName, Object value) {
+		try {
+			Statement sql = db.createStatement();
+			return sql.executeUpdate("DELETE FROM " + tableName + " WHERE " + columnName + " = '" + value + "'");
+		} catch (SQLException e) {
+			System.out.println("erreur + " + e.getMessage());
+			return 0;
+		}
 	}
 
 	public String[] fieldNames(String tableName) {
@@ -225,7 +244,6 @@ public class Database {
 		}
 		return null;
 	}
-	
 
 }
 

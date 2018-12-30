@@ -1,20 +1,20 @@
 package models;
 
-import java.sql.Time;
+import java.time.LocalTime;
 
 public class Prayer {
 
 	private Integer id;
 	private String frenchName;
 	private String arabicName;
-	private Time time;
+	private LocalTime time;
 	private String notificationMessage;
 
 	public Prayer() {
 		notificationMessage = toString();
 	}
 
-	public Prayer(Integer id, String frenchName, String arabicName, Time time, String notificationMessage) {
+	public Prayer(Integer id, String frenchName, String arabicName, LocalTime time, String notificationMessage) {
 		this.id = id;
 		this.frenchName = frenchName;
 		this.arabicName = arabicName;
@@ -38,11 +38,11 @@ public class Prayer {
 		this.arabicName = arabicName;
 	}
 
-	public Time getTime() {
+	public LocalTime getTime() {
 		return time;
 	}
 
-	public void setTime(Time time) {
+	public void setTime(LocalTime time) {
 		this.time = time;
 	}
 
@@ -54,11 +54,11 @@ public class Prayer {
 		this.frenchName = frenchName;
 	}
 
-	public Time getHour() {
+	public LocalTime getHour() {
 		return time;
 	}
 
-	public void setHour(Time hour) {
+	public void setHour(LocalTime hour) {
 		this.time = hour;
 	}
 
