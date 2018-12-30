@@ -1,6 +1,5 @@
 package models;
 
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -25,6 +24,7 @@ public class Agenda {
 		this.date = date;
 		this.time = time;
 	}
+
 
 	public Integer getId() {
 		return id;
@@ -77,4 +77,5 @@ public class Agenda {
 	public void setTime(LocalTime time) {
 		this.time = time;
 	}
+
 }

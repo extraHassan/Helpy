@@ -12,9 +12,16 @@ public class RowLabel extends JPanel {
         this.title=new JLabel(title);
         this.value=new JLabel(value);
         initLabels();
-        setLayout(new GridLayout(1,2,2,2));
-        add(this.title);
-        add(this.value);
+
+        JPanel pane = new JPanel();
+        pane.setLayout(new GridLayout(1,2,2,2));
+        pane.add(this.title);
+        pane.add(this.value);
+        pane.setOpaque(false);
+
+        setLayout(new BorderLayout());
+        add(pane,BorderLayout.CENTER);
+        setOpaque(false);
     }
 
     public void initLabels(){

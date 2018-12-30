@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class ContactPane extends JFrame {
     private JTabbedPane jTabbedPane = new JTabbedPane();
-    private ListPane listPane = new ListPane();
+    private ListContact listPane = new ListContact();
     private ManageContact manageContact = new ManageContact();
     private JPanel block_pane = new JPanel(new BorderLayout());
     private ContactService contactService = new ContactService();
