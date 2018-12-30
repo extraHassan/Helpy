@@ -10,7 +10,7 @@ import java.awt.event.MouseEvent;
 
 public class MailFrame extends JFrame {
     private RowMail de=new RowMail("De");
-    private RowMail à = new RowMail("à");
+    private RowMail destinataire = new RowMail("à");
     private RowMail object = new RowMail("Objet");
     private JLabel send = new JLabel();
 
@@ -44,7 +44,7 @@ public class MailFrame extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 String emetteur = de.getValue();
-                String recepteur = à.getValue();
+                String recepteur = destinataire.getValue();
                 String objet = object.getValue();
                 String lettre = message.getText();
                 int status = 0;
@@ -84,7 +84,7 @@ public class MailFrame extends JFrame {
 
     public void initNorth(){
         north.add(de);
-        north.add(à);
+        north.add(destinataire);
         north.add(object);
         north.setBorder(BorderFactory.createEmptyBorder(0,0,15,0));
         north.setOpaque(false);

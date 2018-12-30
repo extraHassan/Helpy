@@ -4,7 +4,7 @@ import models.Contact;
 
 import javax.swing.*;
 import java.awt.*;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Vector;
 
 public class ListContact extends JPanel {
@@ -28,7 +28,7 @@ public class ListContact extends JPanel {
     public void contactsToContactsPanes(){
         System.out.println(contacts.size());
         for (Contact c : contacts){
-            c.setDateAdded(new Date(System.currentTimeMillis()));
+            c.setDateAdded(LocalDate.now());
             c.setFavorite(true);
             c.setGroup("famille");
             c.setId(2);
