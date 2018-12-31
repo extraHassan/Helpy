@@ -25,6 +25,14 @@ public class RowField  extends JPanel{
         return rowContainer;
     }
 
+    public void fillInput(String text){
+        this.input.setText(text);
+    }
+
+    public void setInput(JTextField input) {
+        this.input = input;
+    }
+
     public RowField(String label, int size){
         title = new JLabel(label);
         title.setForeground(designer.getFontColor());

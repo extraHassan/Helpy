@@ -113,8 +113,10 @@ public class Database {
 		sb.append(")");
 
 		try {
+            System.out.println("before MySQL )>>>  | "+sb.toString());
 
 			Statement sql = db.createStatement();
+			System.out.println("MySQL )>>>  | "+sb.toString());
 			return sql.executeUpdate(sb.toString());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
