@@ -12,8 +12,10 @@ public class MedicamentPane extends JFrame {
     private ListMedicament listPane  = new ListMedicament();
     private ImagePane block_pane ;
     private Designer designer = new Designer();
+    private AddMedicamentFrame addMedicamentFrame;
 
     public MedicamentPane() {
+
         initBlockPane();
         setTitle("Médicaments");
         setContentPane(block_pane);
@@ -46,7 +48,7 @@ public class MedicamentPane extends JFrame {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                JFrame frame = new AddMedicamentPane();
+                addMedicamentFrame=new AddMedicamentFrame();
             }
         });
 
@@ -55,6 +57,7 @@ public class MedicamentPane extends JFrame {
         block_pane.add(addMedicamentPane,BorderLayout.NORTH);
         block_pane.add(jScrollPane,BorderLayout.CENTER);
         block_pane.setOpaque(false);
+
     }
 
     public static void main(String[] args) {

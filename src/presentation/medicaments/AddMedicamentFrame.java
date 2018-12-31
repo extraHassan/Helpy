@@ -15,14 +15,13 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class AddMedicamentPane extends JFrame {
+public class AddMedicamentFrame extends JFrame {
     private ImagePane block_page = new ImagePane("resources/images/141540-OTE8CQ-402.jpg");
     private JButton addButton = new JButton();
     private Designer designer = new Designer();
     private MedicamentService medicamentService = new MedicamentService();
 
-
-    public AddMedicamentPane(){
+    public AddMedicamentFrame(){
         buildBlockPage();
         setContentPane(block_page);
         pack();
@@ -78,6 +77,7 @@ public class AddMedicamentPane extends JFrame {
                             med.setEnd(date);
                             med.setPrice(Double.parseDouble(rowFields[5].getInput().getText()));
                             medicamentService.addMedicament(med);
+
                             JOptionPane.showMessageDialog(null,"Médicament bien ajouté","info", 1);
 
                         }catch (Exception i){
@@ -114,7 +114,4 @@ public class AddMedicamentPane extends JFrame {
             block_page.add(addButton);
     }
 
-    public static void main(String[] args) {
-        new AddMedicamentPane();
-    }
 }
