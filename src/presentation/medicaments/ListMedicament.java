@@ -57,6 +57,15 @@ public class ListMedicament extends JPanel {
         repaint();
         buildListMedicament();
     }
+    public void refresh(){
+        block_page.removeAll();
+        removeAll();
+        block_page.revalidate();
+        block_page.repaint();
+        revalidate();
+        repaint();
+        buildListMedicament();
+    }
 
     public void convertMedicamentsToMedicamentsPane(){
         List<Medicament> meds = medicamentService.findAll();

@@ -20,8 +20,13 @@ public class AddMedicamentFrame extends JFrame {
     private JButton addButton = new JButton();
     private Designer designer = new Designer();
     private MedicamentService medicamentService = new MedicamentService();
+    private ListMedicament listWhereWeAdd;
 
-    public AddMedicamentFrame(){
+    public AddMedicamentFrame(ListMedicament listMedicament){
+        this.listWhereWeAdd=listMedicament;
+    }
+
+    public void construct(){
         buildBlockPage();
         setContentPane(block_page);
         pack();
@@ -45,7 +50,7 @@ public class AddMedicamentFrame extends JFrame {
                 }
 
                 public void mouseClicked(MouseEvent e) {
-
+                    addButton.setCursor(new Cursor(Cursor.WAIT_CURSOR));
                     DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
                     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                     int errorCode = 0;
@@ -77,6 +82,7 @@ public class AddMedicamentFrame extends JFrame {
                             med.setEnd(date);
                             med.setPrice(Double.parseDouble(rowFields[5].getInput().getText()));
                             medicamentService.addMedicament(med);
+                            listWhereWeAdd.refresh();
 
                             JOptionPane.showMessageDialog(null,"Médicament bien ajouté","info", 1);
 

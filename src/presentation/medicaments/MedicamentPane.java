@@ -9,13 +9,12 @@ import java.awt.event.MouseEvent;
 
 public class MedicamentPane extends JFrame {
 
-    private ListMedicament listPane  = new ListMedicament();
+    private ListMedicament listPane;
     private ImagePane block_pane ;
-    private Designer designer = new Designer();
+    private Designer designer;
     private AddMedicamentFrame addMedicamentFrame;
 
     public MedicamentPane() {
-
         initBlockPane();
         setTitle("Médicaments");
         setContentPane(block_pane);
@@ -25,6 +24,8 @@ public class MedicamentPane extends JFrame {
     }
 
     public  void initBlockPane(){
+        designer = new Designer();
+        listPane  = new ListMedicament();
 
         JScrollPane jScrollPane = new JScrollPane(listPane);
         jScrollPane.setOpaque(false);
@@ -35,29 +36,31 @@ public class MedicamentPane extends JFrame {
         labelAdd.setForeground(designer.getFontColor());
         labelAdd.setFont(designer.getFont());
 
-        JPanel addMedicamentPane = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        addMedicamentPane.setBackground(designer.getOpacityBgColor());
-        addMedicamentPane.add(labelAdd);
-        addMedicamentPane.setBorder(BorderFactory.createMatteBorder(0,0,4,0,designer.getLightGreen()));
+        JPanel addNewMed = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        addNewMed.setBackground(designer.getOpacityBgColor());
+        addNewMed.add(labelAdd);
+        addNewMed.setBorder(BorderFactory.createMatteBorder(0,0,4,0,designer.getLightGreen()));
 
-        addMedicamentPane.addMouseListener(new MouseAdapter() {
+        addNewMed.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                addMedicamentPane.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                addNewMed.setCursor(new Cursor(Cursor.HAND_CURSOR));
             }
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                addMedicamentFrame=new AddMedicamentFrame();
+                addNewMed.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+                addMedicamentFrame.construct();
             }
         });
 
         block_pane = new ImagePane("resources/images/coeur.png");
         block_pane.setLayout(new BorderLayout());
-        block_pane.add(addMedicamentPane,BorderLayout.NORTH);
+        block_pane.add(addNewMed,BorderLayout.NORTH);
         block_pane.add(jScrollPane,BorderLayout.CENTER);
         block_pane.setOpaque(false);
 
+        addMedicamentFrame=new AddMedicamentFrame(listPane);
     }
 
     public static void main(String[] args) {
