@@ -31,9 +31,9 @@ public class PrayerDaoImpl implements PrayerDao {
 			for (int j = 0; j < data[i].length; j++) {
 				// System.out.println(data[i][j]);
 				prayer.setId(Integer.parseInt(data[i][j]));
-				prayer.setArabicName(data[i][++j]);
 				prayer.setFrenchName(data[i][++j]);
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+                prayer.setArabicName(data[i][++j]);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 				LocalTime dateTime = LocalTime.parse(data[i][++j], formatter);
 				prayer.setTime(dateTime);
 				prayer.setNotificationMessage(data[i][++j]);
@@ -88,8 +88,9 @@ public class PrayerDaoImpl implements PrayerDao {
 	}
 
 	@Override
-	public boolean updateTime(int id, String name) {
-		int a = db.update(DatabaseInfos.PRAYER, id, name);
+	public boolean updateTime(int id, String time) {
+		Prayer prayer = select(id);
+		int a = db.update(DatabaseInfos.PRAYER, id,prayer.getFrenchName(), prayer.getArabicName(), time, prayer.getNotificationMessage());
 		if (a != 0)
 			return true;
 		return false;

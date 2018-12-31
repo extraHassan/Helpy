@@ -20,12 +20,9 @@ public class PrayerFrame extends JFrame {
 
     public void initPrayers(){
         List<Prayer> prayers = prayerService.findAll();
-        System.out.println("prayers size => " + prayers.size());
-
         for(Prayer prayer : prayers){
             prayerHashMap.put(prayer.getId(),prayer);
         }
-        System.out.println("prayerHashMap => " + prayerHashMap.size());
     }
 
     public void initRowsPrayer(){

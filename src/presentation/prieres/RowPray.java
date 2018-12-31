@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalTime;
 
 public class RowPray extends  JPanel  {
 
@@ -62,6 +63,7 @@ public class RowPray extends  JPanel  {
                 if(e.getClickCount()>=4){
                     String newTime = JOptionPane.showInputDialog(null,"vous voulez changer l'heure ? ",prayer.getFrenchName(),1);
                     if(newTime!=null && !newTime.isEmpty()){
+                        prayer.setTime(LocalTime.parse(newTime));
                         prayerService.updateTime(prayer.getId(),newTime);
                         time.setText(prayer.getTime().toString());
                     }
@@ -94,7 +96,6 @@ public class RowPray extends  JPanel  {
                 pane.setOpaque(true);
                 pane.repaint();
             }
-
 
             @Override
             public void mouseExited(MouseEvent e) {
