@@ -101,17 +101,17 @@ public class ManageContact extends JPanel {
         saveOrReset.setBackground(designer.getBgColor());
     }
 
-    public ImageIcon resizeImage(String path ) {
+    public ImageIcon resizeImage(String path,int width,int height ) {
         ImageIcon icon = new ImageIcon(path);
         Image image = icon.getImage();
-        Image image2 = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        Image image2 = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
         ImageIcon icon2 = new ImageIcon(image2);
         return icon2;
     }
 
 
     public void initImage(){
-        JLabel label = new JLabel(resizeImage("resources/images/add-contacts.png"));
+        JLabel label = new JLabel(resizeImage("resources/images/add-contacts.png",100,100));
         label.setHorizontalAlignment(0);
         label.setVerticalAlignment(0);
         label.setPreferredSize(new Dimension(100,100));

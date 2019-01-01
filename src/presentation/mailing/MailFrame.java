@@ -2,25 +2,36 @@ package presentation.mailing;
 
 import presentation.components.Designer;
 import presentation.components.ImagePane;
+import presentation.prieres.PrayerFrame;
 import services.MailService;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class MailFrame extends JFrame {
     private RowMail de=new RowMail("De");
     private RowMail destinataire = new RowMail("à");
     private RowMail object = new RowMail("Objet");
     private JLabel send = new JLabel();
-
     private JTextArea message = new JTextArea();
     private Designer designer = new Designer();
     private JScrollPane jScrollPane;
-
     private JPanel north = new JPanel(new GridLayout(3,1,0,15));
-    public MailFrame(){
+
+    private static int lock =0;
+    private static MailFrame mailFrame;
+
+
+    private MailFrame(){
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                lock=0;
+            }
+        });
         initFrame();
     }
 
@@ -141,15 +152,20 @@ public class MailFrame extends JFrame {
 
         setTitle("Email");
         setContentPane(contentPane);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-
         pack();
-
-
     }
 
-    public static void main(String[] args) {
-        new MailFrame();
+    public static MailFrame getInstance() {
+        if (lock==0){
+            mailFrame= new MailFrame();
+            lock=1;
+        }
+        return mailFrame;
     }
+
+    public static int getLock() {
+        return lock;
+    }
+
 }

@@ -7,16 +7,21 @@ import services.PrayerService;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.HashMap;
 import java.util.List;
 
-public class PrayerFrame extends JFrame {
+public class PrayerFrame extends JFrame  {
 
     private JPanel block_pane = new JPanel();
     private HashMap<Integer, Prayer> prayerHashMap = new HashMap<>();
     private HashMap<Integer,RowPray> rowPrayHashMap = new HashMap<>();
     private PrayerService prayerService=new PrayerService();
     private Designer designer = new Designer();
+
+    private static int lock =0;
+    private static PrayerFrame prayerFrame;
 
     public void initPrayers(){
         List<Prayer> prayers = prayerService.findAll();
@@ -49,12 +54,17 @@ public class PrayerFrame extends JFrame {
     public void initFrame(){
             setTitle("Prayers");
             setBackground(designer.getBgColor());
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             pack();
             setVisible(true);
     }
 
-    public PrayerFrame(){
+    private PrayerFrame(){
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                lock=0;
+            }
+        });
         initBlockPane();
 
         ImagePane block_pane_Container=new ImagePane("resources/images/masjid.png");
@@ -66,11 +76,17 @@ public class PrayerFrame extends JFrame {
         initFrame();
     }
 
-    public static void main(String[] args) {
-        new PrayerFrame();
+
+
+    public  static PrayerFrame getInstance() {
+        if (lock==0){
+            prayerFrame = new PrayerFrame();
+            lock=1;
+        }
+        return prayerFrame;
     }
 
-
-
-
+    public static int getLock() {
+        return lock;
+    }
 }

@@ -1,24 +1,35 @@
 package presentation.medicaments;
 
+import models.Medicament;
 import presentation.components.Designer;
 import presentation.components.ImagePane;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-public class MedicamentPane extends JFrame {
+public class MedicamentFrame extends JFrame {
 
     private ListMedicament listPane;
     private ImagePane block_pane ;
     private Designer designer;
     private AddMedicamentFrame addMedicamentFrame;
 
-    public MedicamentPane() {
+    private static int lock =0;
+    private static MedicamentFrame medicamentFrame;
+
+    private MedicamentFrame() {
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                lock=0;
+            }
+        });
         initBlockPane();
         setTitle("Médicaments");
         setContentPane(block_pane);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
         setVisible(true);
     }
@@ -63,8 +74,16 @@ public class MedicamentPane extends JFrame {
         addMedicamentFrame=new AddMedicamentFrame(listPane);
     }
 
-    public static void main(String[] args) {
-        new MedicamentPane();
+    public static MedicamentFrame getInstance() {
+        if (lock==0){
+            medicamentFrame= new MedicamentFrame();
+            lock=1;
+        }
+        return medicamentFrame;
+    }
+
+    public static int getLock() {
+        return lock;
     }
 
 }

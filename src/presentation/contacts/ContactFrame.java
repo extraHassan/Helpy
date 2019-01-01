@@ -1,18 +1,26 @@
 package presentation.contacts;
 
-import services.ContactService;
-
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-public class ContactPane extends JFrame {
+public class ContactFrame extends  JFrame  {
 
     private JTabbedPane jTabbedPane = new JTabbedPane();
     private ListContact listPane = new ListContact("resources/images/emoji.jpg");
     private ManageContact manageContact = new ManageContact(listPane);
     private JPanel block_pane = new JPanel(new BorderLayout());
 
-	public ContactPane() {
+    private static int lock = 0 ;
+    private static ContactFrame contactFrame;
+
+    private ContactFrame() {
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                lock=0;
+            }
+        });
         initBlockPane();
         setTitle("Contacts");
         setContentPane(block_pane);
@@ -29,9 +37,14 @@ public class ContactPane extends JFrame {
         block_pane.add(jTabbedPane,BorderLayout.CENTER);
 	}
 
-    public static void main(String[] args) {
-        new ContactPane();
+    public static ContactFrame getInstance() {
+        if (lock==0){
+            contactFrame = new ContactFrame();
+            lock=1;
+        }
+        return contactFrame;
     }
-	
-	
+    public static int getLock() {
+        return lock;
+    }
 }

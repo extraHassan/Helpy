@@ -212,14 +212,4 @@ public class RowContact extends JPanel {
         add(block_pane);
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        ContactService contactService = new ContactService();
-        Contact contact = contactService.findAll().get(0);
-        frame.setSize(new Dimension(600,800));
-        frame.setContentPane(new RowContact(new ListContact("resources/images/emoji.jpg"),contact));
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-
-    }
  }
