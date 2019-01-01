@@ -12,7 +12,6 @@ public class Contact {
 	private LocalDate dateAdded;
 
 	public Contact() {
-		// here i should initiate the dateAdded;
 	}
 
 	public Contact(Integer id, String name, String groupe, String number, String image, boolean favorite,

@@ -106,17 +106,27 @@ public class Database {
 		for (int i = 1; i < row.length; i++) {
 			if (row[i].equals(true) || row[i].equals(false)) {
 				sb.append(", " + row[i] + "");
-			} else {
-				sb.append(", '" + row[i] + "'");
+			}
+			else if(row[i].toString().contains("\\")){
+                System.out.println("find it =================================>   "+row[i]);
+                String path = row[i].toString();
+                String newPath = path.replace("\\","/");
+                System.out.println(newPath+"   <=================================");
+                sb.append(", '" + path + "'");
+
+                System.out.println(path);
+
+            }
+
+			else {
+				sb.append(", \"" + row[i] + "\"");
 			}
 		}
 		sb.append(")");
 
 		try {
             System.out.println("before MySQL )>>>  | "+sb.toString());
-
 			Statement sql = db.createStatement();
-			System.out.println("MySQL )>>>  | "+sb.toString());
 			return sql.executeUpdate(sb.toString());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -177,9 +187,10 @@ public class Database {
 
 		sb.append("where " + delimit(f[0]) + " = " + row[0]);
 
+		System.out.println("sql query : " + sb.toString());
+
 		try {
 			Statement sql = db.createStatement();
-            System.out.println("sql query : " + sb.toString());
             return sql.executeUpdate(sb.toString());
 		} catch (Exception e) {
 			System.out.println("erreur + " + e.getMessage());

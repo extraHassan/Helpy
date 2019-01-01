@@ -1,14 +1,20 @@
 package presentation.contacts;
 
+import jdk.nashorn.internal.scripts.JO;
 import models.Contact;
+import presentation.components.Designer;
 import presentation.components.ImagePane;
+import services.ContactService;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class RowContact extends JPanel {
 
+    private Designer designer = new Designer() ;
     private JPanel center =null;
     private JLabel date;
     private JPanel contactHandler = new JPanel(new GridLayout(1,3,10,0));
@@ -20,9 +26,11 @@ public class RowContact extends JPanel {
     private Color bgColor = new Color(250,227,214);
     private Color fontColor= new Color(17,47,59);
     private Color borderColor= new Color(227,204,189);
-    EmptyBorder emptyBorder = new EmptyBorder(4,2,4,2);
+    private EmptyBorder emptyBorder = new EmptyBorder(4,2,4,2);
+    private ListContact bigContainer;
 
     private Contact contact;
+    private ContactService contactService  = new ContactService();
 
     public void initDate(){
         String labelDate  = contact.getDateAdded().toString();
@@ -31,6 +39,7 @@ public class RowContact extends JPanel {
         date.setHorizontalAlignment(SwingConstants.CENTER);
         date.setForeground(fontColor);
         date.setBackground(bgColor);
+
     }
 
     public void initPhone(){
@@ -40,6 +49,20 @@ public class RowContact extends JPanel {
         phone.setHorizontalAlignment(SwingConstants.CENTER);
         phone.setForeground(fontColor);
         phone.setBackground(bgColor);
+
+        phone.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if(e.getClickCount() >= 3){
+                    String confirm = JOptionPane.showInputDialog(null,"vous voulez changez le numéro ? ");
+                    if(!confirm.isEmpty()){
+                        phone.setText(confirm);
+                        phone.revalidate();
+                        phone.repaint();
+                        contactService.updateNumber(contact.getId(),confirm);
+                    }
+                }
+            }
+        });
     }
 
     public void initNameAndGroup(){
@@ -49,6 +72,31 @@ public class RowContact extends JPanel {
         nameAndGroup.setHorizontalAlignment(SwingConstants.CENTER);
         nameAndGroup.setForeground(fontColor);
         nameAndGroup.setBorder(BorderFactory.createMatteBorder(0,0,1,0,borderColor));
+
+        nameAndGroup.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if(e.getClickCount() >= 3){
+                    String name = JOptionPane.showInputDialog(null,"Vous voulez changer le nom ? ");
+                    String prenom = JOptionPane.showInputDialog(null,"Vous voulez changer le prénom ? ");
+
+                    if(!prenom.isEmpty() && !prenom.isEmpty()){
+                        contactService.updateName(contact.getId(),name+ " "+ prenom);
+                    }
+
+                    String group = JOptionPane.showInputDialog(null, "Vous voulez changer le groupe ? ");
+                    if(!group.isEmpty()){
+                        contactService.updateGroup(contact.getId(),group);
+                    }
+
+                    if(!name.isEmpty() && !group.isEmpty()){
+                        String currentNameAndGroup = name+" "+prenom + " ("+group+")";
+                        nameAndGroup.setText(currentNameAndGroup);
+                        nameAndGroup.revalidate();
+                        nameAndGroup.repaint();
+                    }
+                }
+            }
+        });
     }
 
     public void initProfile(){
@@ -60,26 +108,70 @@ public class RowContact extends JPanel {
     }
 
     public  void initContactHandler(){
-        ImagePane fav;
+        JLabel fav = new JLabel();
+        fav.setHorizontalAlignment(0);
+        fav.setVerticalAlignment(0);
         if(contact.isFavorite()){
-             fav = new ImagePane("resources/images/yellowStar.png");
+            fav.setIcon(new ImageIcon("resources/images/star.png"));
+            fav.repaint();
+            fav.revalidate();
+            System.out.println("favorite is true");
         }
         else{
-            fav = new ImagePane("resources/images/star.png");
+            fav.setIcon(new ImageIcon("resources/images/blackStar.png"));
+            fav.repaint();
+            fav.revalidate();
+            System.out.println("favorite is false");
         }
-        ImagePane update = new ImagePane("resources/images/update.png");
+
         ImagePane delete = new ImagePane("resources/images/suprimer.png");
+        delete.setOpaque(false);
         fav.setPreferredSize(new Dimension(20,20));
-        update.setPreferredSize(new Dimension(20,20));
         delete.setPreferredSize(new Dimension(20,20));
+
+        delete.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent e) {
+                delete.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int response = JOptionPane.showConfirmDialog(null,"vous voulez vraiment supprimer ce contact ? ");
+                if(response==0){
+                    bigContainer.deleteRowContact(contact.getId());
+                }
+            }
+        });
+
+        fav.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if(e.getClickCount()>=3){
+                   if(contact.isFavorite()){
+                       fav.setIcon(new ImageIcon("resources/images/blackStar.png"));
+                       fav.revalidate();
+                       fav.repaint();
+                       contactService.updateFavorite(contact.getId(),false);
+                   }else{
+                       fav.setIcon(new ImageIcon("resources/images/star.png"));
+                       fav.revalidate();
+                       fav.repaint();
+                       contactService.updateFavorite(contact.getId(),true);
+                   }
+                }
+
+            }
+        });
+
         contactHandler.add(fav);
-        contactHandler.add(update);
         contactHandler.add(delete);
         contactHandler.setBackground(bgColor);
     }
 
     public  void initThis(){
-        setLayout(new BorderLayout());
+        setLayout(new GridLayout(1,1));
         setBorder(BorderFactory.createMatteBorder(0,0,1,0,Color.black));
         setBackground(bgColor);
     }
@@ -93,8 +185,10 @@ public class RowContact extends JPanel {
         center.setBackground(bgColor);
     }
 
-    public RowContact(Contact contact){
+    public RowContact(ListContact bigContainer,Contact contact){
+        this.bigContainer=bigContainer;
         this.contact = contact;
+
         initDate();
         initPhone();
         initNameAndGroup();
@@ -103,12 +197,29 @@ public class RowContact extends JPanel {
         initCenter();
         initThis();
 
+
+        profile.setOpaque(false);
+        center.setOpaque(false);
+        contactHandler.setOpaque(false);
+
         JPanel block_pane = new JPanel(new BorderLayout());
         block_pane.add(profile,BorderLayout.WEST);
         block_pane.add(center,BorderLayout.CENTER);
         block_pane.setBorder(emptyBorder);
         block_pane.setBackground(bgColor);
+        block_pane.setOpaque(false);
+        setBackground(new Color(128, 255, 112));
+        add(block_pane);
+    }
 
-        add(block_pane,BorderLayout.NORTH);
+    public static void main(String[] args) {
+        JFrame frame = new JFrame();
+        ContactService contactService = new ContactService();
+        Contact contact = contactService.findAll().get(0);
+        frame.setSize(new Dimension(600,800));
+        frame.setContentPane(new RowContact(new ListContact("resources/images/emoji.jpg"),contact));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+
     }
  }

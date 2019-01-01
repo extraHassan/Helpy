@@ -16,16 +16,12 @@ public class ImagePane  extends JPanel{
 	private BufferedImage imagebuffer;
     private Color bgColor = new Color(250,227,214);
 
-    public BufferedImage getImagebuffer() {
-    	setBackground(Color.green);
-		return imagebuffer;
+	public void setImage(String image) {
+		this.image = image;
 	}
 
-	public void setImagebuffer(BufferedImage imagebuffer) {
-		this.imagebuffer = imagebuffer;
-	}
-
-	public ImagePane(String image) {
+	public ImagePane(String img) {
+	    this.image=img;
 		setBackground(bgColor);
 
 		try {

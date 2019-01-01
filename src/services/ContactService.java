@@ -46,6 +46,6 @@ public class ContactService {
 	}
 
 	public boolean updateFavorite(int id, boolean favorite) {
-		return updateFavorite(id, favorite);
+		return contactDao.updateFavorite(id, favorite);
 	}
 }

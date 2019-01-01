@@ -28,19 +28,17 @@ public class ContactDaoImpl implements ContactDao {
 		Contact contact = new Contact();
 		String[][] data = db.select(DatabaseInfos.CONTACT, "id", id);
 		for (int i = 1; i < data.length; i++) {
-			for (int j = 0; j < data[i].length; j++) {
-				// System.out.println(data[i][j]);
-				contact.setId(Integer.parseInt(data[i][j]));
-				contact.setName(data[i][++j]);
-				contact.setGroup(data[i][++j]);
-				contact.setNumber(data[i][++j]);
-				contact.setImage(data[i][++j]);
-				contact.setFavorite(Boolean.parseBoolean(data[i][++j]));
+                for (int j = 0; j < data[i].length; j++) {
+                    contact.setId(Integer.parseInt(data[i][j]));
+                    contact.setName(data[i][++j]);
+                    contact.setGroup(data[i][++j]);
+                    contact.setNumber(data[i][++j]);
+                    contact.setImage(data[i][++j]);
+                    contact.setFavorite(Boolean.parseBoolean(data[i][++j]));
 
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-				LocalDate dateTime = LocalDate.parse(data[i][++j], formatter);
-				contact.setDateAdded(dateTime);
-
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    LocalDate dateTime = LocalDate.parse(data[i][++j], formatter);
+                    contact.setDateAdded(dateTime);
 			}
 		}
 		return contact;
@@ -84,13 +82,13 @@ public class ContactDaoImpl implements ContactDao {
 				contact.setGroup(data[i][++j]);
 				contact.setNumber(data[i][++j]);
 				contact.setImage(data[i][++j]);
-				contact.setFavorite(Boolean.parseBoolean(data[i][++j]));
-				
+                boolean bool = Boolean.parseBoolean(data[i][++j]);
+				contact.setFavorite(bool);
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 				LocalDate dateTime = LocalDate.parse(data[i][++j], formatter);
 				contact.setDateAdded(dateTime);
-				
 			}
+			contact.setImage("resources/images/alarm-clock.png");
 			contacts.add(contact);
 		}
 		return contacts;
