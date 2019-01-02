@@ -27,7 +27,7 @@ public class MySQLDatabase extends DataSource{
 	
 	public String getURL() {
 		
-		return getBridge()+"//"+getHost()+"/"+getSource();
+		return getBridge()+"//"+getHost()+"/"+getSource()+ "?useUnicode=yes&characterEncoding=UTF-8";
 	}
 
 	public String startDelimiter() {

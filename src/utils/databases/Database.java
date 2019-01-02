@@ -1,5 +1,8 @@
 package utils.databases;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FilePermission;
 import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -134,9 +137,13 @@ public class Database {
 		Object row[] = new Object[f.length];
 		try {
 			for (int i = 0; i < row.length; i++) {
+
 				f[i].setAccessible(true);
+				System.out.println(f[i].getName());
+
 				row[i] = f[i].get(object);
 				f[i].setAccessible(false);
+
 			}
 
 			return insert(tableName, row);

@@ -35,8 +35,14 @@ public class ContactDaoImpl implements ContactDao {
 				contact.setGroup(data[i][++j]);
 				contact.setNumber(data[i][++j]);
 				contact.setImage(data[i][++j]);
-				contact.setFavorite(Boolean.parseBoolean(data[i][++j]));
-
+				
+				if(data[i][++j].equals("1")) {
+					contact.setFavorite(true);
+				}
+				
+				else if(data[i][j].equals("0")){
+					contact.setFavorite(false);
+				}
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 				LocalDate dateTime = LocalDate.parse(data[i][++j], formatter);
 				contact.setDateAdded(dateTime);
@@ -48,6 +54,7 @@ public class ContactDaoImpl implements ContactDao {
 
 	@Override
 	public boolean insert(Contact model) {
+	
 		int a = db.insert(model);
 		if (a != 0)
 			return true;
@@ -84,8 +91,15 @@ public class ContactDaoImpl implements ContactDao {
 				contact.setGroup(data[i][++j]);
 				contact.setNumber(data[i][++j]);
 				contact.setImage(data[i][++j]);
-				contact.setFavorite(Boolean.parseBoolean(data[i][++j]));
 				
+				if(data[i][++j].equals("1")) {
+					contact.setFavorite(true);
+				}
+				
+				else if(data[i][j].equals("0")){
+					contact.setFavorite(false);
+				}
+		
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 				LocalDate dateTime = LocalDate.parse(data[i][++j], formatter);
 				contact.setDateAdded(dateTime);

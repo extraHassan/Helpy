@@ -1,21 +1,23 @@
 package Test;
 
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import dao.AgendaDao;
-import dao.AgendaDaoImpl;
 import dao.ContactDaoImpl;
 import dao.MedicamentDao;
 import dao.MedicamentDaoImpl;
 import dao.PrayerDao;
 import dao.PrayerDaoImpl;
-import models.Agenda;
 import models.Contact;
 import models.Medicament;
 import models.Prayer;
+import services.ContactService;
 import services.MailService;
+import services.NotificatorService;
 
 
 public class Test {
@@ -26,23 +28,37 @@ public class Test {
 
 	void exp01() {
 		Contact contact = new Contact();
-
+		ContactService cs = new ContactService();
+		
 		contact.setDateAdded(LocalDate.now());
 		contact.setFavorite(true);
-		contact.setGroup("famille");
-
-		contact.setImage("no image");
-		contact.setName("toto tota");
+		contact.setGroup("sdkjf");
+		File fi = new File("C:\\Users\\muscu\\Desktop\\bricolo\\logo2.png");
+		
+        try {
+			FileInputStream fis = new FileInputStream(fi);
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+		contact.setImage(fi.getPath());
+		//System.out.println(contact.getImage());
+		contact.setName("test image ");
 		contact.setNumber("0635135348");
 		ContactDaoImpl contactMapper = new ContactDaoImpl();
-		//System.out.println(contactMapper.select(6).getDateAdded());
-		// contactMapper.insert(contact);
+		//System.out.println(contactMapper.select(7).isFavorite());
+		 contactMapper.insert(contact);
+		// cs.addContact(contact);
+		// cs.updateFavorite(7, true);
 		// contactMapper.delete(5);
 		//System.out.println(contactMapper.updateFavorite(6, false));
 		// System.out.println(contactMapper.updateName(6, "ahmed belarbi"));
 		// System.out.println(contactMapper.updateGroup(6, "friends"));
 		// System.out.println(contactMapper.updateImage(6, "pas dimage"));
-		System.out.println(contactMapper.liste().get(0).getId());
+		
+		System.out.println(contactMapper.liste().get(13).getImage());
 	}
 	
 	
@@ -64,19 +80,25 @@ public class Test {
 		// System.out.println(contactMapper.updateName(6, "ahmed belarbi"));
 		// System.out.println(contactMapper.updateGroup(6, "friends"));
 		// System.out.println(contactMapper.updateImage(6, "pas dimage"));
-		System.out.println(medicamentMapper.insert(medicament));
-		System.out.println(medicamentMapper.select(1).getUseCase());
+		//System.out.println(medicamentMapper.insert(medicament));
+		
+		System.out.println(medicamentMapper.liste());
 	}
 
 	void exp02() {
+		
 		PrayerDao pd = new PrayerDaoImpl();
 		Prayer p = new Prayer();
 		p.setArabicName("dohr");
 		p.setFrenchName("dooohr");
 		p.setTime(LocalTime.now());
 		p.setNotificationMessage("sdahfasdklh a hdsjkfh asd fhaef kasjdh fjkasdhf jkasdhf");
+		NotificatorService ns = new NotificatorService();
+		ns.notifyPrayer(p);
 		
-		System.out.println(pd.insert(p));
+		
+		
+		//System.out.println(pd.insert(p));
 	}
 	
 	void exp04() {

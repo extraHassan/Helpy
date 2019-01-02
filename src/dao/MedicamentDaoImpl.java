@@ -5,7 +5,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Vector;
-
 import dao.consts.DatabaseInfos;
 import models.Medicament;
 import utils.databases.DataSource;
@@ -76,11 +75,12 @@ public class MedicamentDaoImpl implements MedicamentDao {
 
 	@Override
 	public List<Medicament> liste() {
-		Medicament medicament = new Medicament();
+		
 		List<Medicament> medicaments = new Vector<>();
 		String[][] data = db.select(DatabaseInfos.MEDICAMENT);
 		for (int i = 1; i < data.length; i++) {
 			for (int j = 0; j < data[i].length; j++) {
+				Medicament medicament = new Medicament();
 				// System.out.println(data[i][j]);
 				medicament.setId(Integer.parseInt(data[i][j]));
 				medicament.setName(data[i][++j]);
@@ -95,6 +95,7 @@ public class MedicamentDaoImpl implements MedicamentDao {
 				medicament.setTime(time);
 				medicament.setUseCase(data[i][++j]);
 				medicament.setPrice(Double.parseDouble(data[i][++j]));
+				medicament.setNotificationMessage(data[i][++j]);
 				medicaments.add(medicament);
 			}
 		}
