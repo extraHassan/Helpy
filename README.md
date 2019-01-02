@@ -15,7 +15,7 @@
 4. Transparent GUI
 5. Communications between JFrames 
 6. JavaMail API
-7- design patterns (singleton)
+7. design patterns(singleton)
 
 ## Services : 
 
