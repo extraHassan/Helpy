@@ -81,8 +81,14 @@ public class ContactDaoImpl implements ContactDao {
 				contact.setGroup(data[i][++j]);
 				contact.setNumber(data[i][++j]);
 				contact.setImage(data[i][++j]);
-                boolean bool = Boolean.parseBoolean(data[i][++j]);
-				contact.setFavorite(bool);
+
+                if(data[i][++j].equals("1")) {
+                    contact.setFavorite(true);
+                }
+                else if(data[i][j].equals("0")){
+                    contact.setFavorite(false);
+                }
+
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 				LocalDate dateTime = LocalDate.parse(data[i][++j], formatter);
 				contact.setDateAdded(dateTime);
