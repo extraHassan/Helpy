@@ -54,7 +54,6 @@ public class Prayer {
 		this.frenchName = frenchName;
 	}
 
-
 	public String getNotificationMessage() {
 		return notificationMessage;
 	}

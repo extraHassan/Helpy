@@ -1,20 +1,25 @@
 package dao;
 
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Vector;
+
 import dao.consts.DatabaseInfos;
 import models.Medicament;
 import utils.databases.DataSource;
 import utils.databases.Database;
 import utils.databases.MySQLDatabase;
 
+
+
 public class MedicamentDaoImpl implements MedicamentDao {
 
 	private DataSource ds;
 	private Database db;
+    private static int id = 0 ;
 
 	public MedicamentDaoImpl() {
 		ds = new MySQLDatabase(DatabaseInfos.DATABASE);
@@ -50,6 +55,10 @@ public class MedicamentDaoImpl implements MedicamentDao {
 
 	@Override
 	public boolean insert(Medicament model) {
+	    String[][] index = db.executeQuery("select max(id) from medicament");
+
+	    model.setId(id);
+	    id++;
 		int a = db.insert(model);
 		if (a != 0)
 			return true;
@@ -75,27 +84,42 @@ public class MedicamentDaoImpl implements MedicamentDao {
 
 	@Override
 	public List<Medicament> liste() {
-		
+
 		List<Medicament> medicaments = new Vector<>();
 		String[][] data = db.select(DatabaseInfos.MEDICAMENT);
 		for (int i = 1; i < data.length; i++) {
 			for (int j = 0; j < data[i].length; j++) {
+
 				Medicament medicament = new Medicament();
 				// System.out.println(data[i][j]);
 				medicament.setId(Integer.parseInt(data[i][j]));
 				medicament.setName(data[i][++j]);
 
+
+                String id = data[i][j];
+                medicament.setId(Integer.parseInt(id));
+
+                String notification = data[i][++j];
+				medicament.setName(notification);
+
+
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 				LocalDate dateTime = LocalDate.parse(data[i][++j], formatter);
 				medicament.setEnd(dateTime);
-				medicament.setWhen(data[i][++j]);
+
+				String when = data[i][++j];
+				medicament.setWhen(when);
 
 				formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 				LocalTime time = LocalTime.parse(data[i][++j], formatter);
 				medicament.setTime(time);
+
 				medicament.setUseCase(data[i][++j]);
+
 				medicament.setPrice(Double.parseDouble(data[i][++j]));
-				medicament.setNotificationMessage(data[i][++j]);
+
+                medicament.setNotificationMessage(data[i][++j]);
+
 				medicaments.add(medicament);
 			}
 		}

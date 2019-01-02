@@ -2,11 +2,13 @@ package presentation.prieres;
 
 import models.Prayer;
 import presentation.components.Designer;
+import services.PrayerService;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalTime;
 
 public class RowPray extends  JPanel  {
 
@@ -16,7 +18,7 @@ public class RowPray extends  JPanel  {
     private Designer designer = new Designer();
     private Prayer prayer;
     private JPanel itemsContainer ;
-
+    PrayerService prayerService = new PrayerService();
 
     public RowPray(Prayer prayer) {
         this.prayer = prayer;
@@ -58,11 +60,11 @@ public class RowPray extends  JPanel  {
         MouseAdapter mouseAdapter = new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if(e.getClickCount()==2){
+                if(e.getClickCount()>=4){
                     String newTime = JOptionPane.showInputDialog(null,"vous voulez changer l'heure ? ",prayer.getFrenchName(),1);
                     if(newTime!=null && !newTime.isEmpty()){
-                        //here the service must change the date
-                        //prayer.setHour(new Time(15,12,3));
+                        prayer.setTime(LocalTime.parse(newTime));
+                        prayerService.updateTime(prayer.getId(),newTime);
                         time.setText(prayer.getTime().toString());
                     }
                     super.mouseClicked(e);
@@ -94,7 +96,6 @@ public class RowPray extends  JPanel  {
                 pane.setOpaque(true);
                 pane.repaint();
             }
-
 
             @Override
             public void mouseExited(MouseEvent e) {

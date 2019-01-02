@@ -1,11 +1,13 @@
 package Test;
 
 
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import dao.ContactDaoImpl;
 import dao.MedicamentDao;
@@ -18,13 +20,68 @@ import models.Prayer;
 import services.ContactService;
 import services.MailService;
 import services.NotificatorService;
+import services.PrayerService;
 
 
 public class Test {
 
 	public Test() {
-		exp02();
+		exp04();
 	}
+
+
+	public void exp04(){
+        PrayerService prayerService = new PrayerService();
+        DateTimeFormatter  dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+
+
+
+        Prayer fajr = new Prayer();
+        fajr.setId(0);
+        fajr.setArabicName("الفجر");
+        fajr.setFrenchName("Fajr");
+        fajr.setTime(LocalTime.parse("06:51",dateTimeFormatter));
+        fajr.setNotificationMessage("الصلاة خير من النوم - قم إلى صلاتك رحمك الله");
+
+        prayerService.addPrayer(fajr);
+
+        Prayer dohr = new Prayer();
+        dohr.setId(1);
+        dohr.setArabicName("الظهر");
+        dohr.setFrenchName("Dohr");
+        dohr.setTime(LocalTime.parse("13:28",dateTimeFormatter));
+        dohr.setNotificationMessage("حان موعد أذان صلاة الظهر");
+        prayerService.addPrayer(dohr);
+
+
+
+        Prayer asr = new Prayer();
+        asr.setId(2);
+        asr.setArabicName("العصر");
+        asr.setFrenchName("Asr");
+        asr.setTime(LocalTime.parse("16:03",dateTimeFormatter));
+        asr.setNotificationMessage("حان موعد أذان صلاة العصر");
+        prayerService.addPrayer(asr);
+
+        Prayer maghrib = new Prayer();
+        maghrib.setId(3);
+        maghrib.setArabicName("المغرب");
+        maghrib.setFrenchName("Maghrib");
+        maghrib.setTime(LocalTime.parse("18:27",dateTimeFormatter));
+        maghrib.setNotificationMessage("حان موعد أذان صلاة المغرب");
+        prayerService.addPrayer(maghrib);
+
+        Prayer ichaa = new Prayer();
+        ichaa.setId(4);
+        ichaa.setArabicName("العشاء");
+        ichaa.setFrenchName("Ichaa");
+        ichaa.setTime(LocalTime.parse("19:45",dateTimeFormatter));
+        ichaa.setNotificationMessage("حان موعد أذان صلاة العشاء");
+        prayerService.addPrayer(ichaa);
+
+
+    }
+
 
 	void exp01() {
 		Contact contact = new Contact();
@@ -101,7 +158,7 @@ public class Test {
 		//System.out.println(pd.insert(p));
 	}
 	
-	void exp04() {
+	void exp05() {
 		MailService ms = new MailService();
 		ms.sendEmail("hassounnambz@gmail.com", "6*15@hassan2018", "elmzabi.hassan18@gmail.com","test d service","slaaaa w slaaaam 3la rassolah ewa jme3 rassk 3liya");
 	}

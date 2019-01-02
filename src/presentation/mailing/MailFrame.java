@@ -2,6 +2,7 @@ package presentation.mailing;
 
 import presentation.components.Designer;
 import presentation.components.ImagePane;
+import services.MailService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,6 +44,7 @@ public class MailFrame extends JFrame {
 
             @Override
             public void mouseClicked(MouseEvent e) {
+                String password=null;
                 String emetteur = de.getValue();
                 String recepteur = destinataire.getValue();
                 String objet = object.getValue();
@@ -59,7 +61,7 @@ public class MailFrame extends JFrame {
                 else if(lettre.isEmpty())
                     status=-4;
                 else {
-                    String password = JOptionPane.showInputDialog(null,"plz insert your gmail password");
+                    password = JOptionPane.showInputDialog(null,"plz insert your gmail password");
                     if(password.isEmpty())
                         status=-5;
                     else {
@@ -74,7 +76,11 @@ public class MailFrame extends JFrame {
                     case -3 : JOptionPane.showMessageDialog(null,"l'objet est vide ! ","cannot send the message !", 2);break;
                     case -4 : JOptionPane.showMessageDialog(null,"le message est vide !","cannot send the message !", 2);break;
                     case -5 : JOptionPane.showMessageDialog(null,"mot de passe n'est pas valide","cannot send the message !", 2);break;
-                    default : JOptionPane.showMessageDialog(null,"message bien envoyé ","cannot send the message !", 1);
+                    default : {
+                        MailService mailService = new MailService();
+                        mailService.sendEmail(emetteur,password,recepteur,objet,lettre);
+                        JOptionPane.showMessageDialog(null,"message bien envoyé ","cannot send the message !", 1);
+                    }
                 }
 
 

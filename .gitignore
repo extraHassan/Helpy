@@ -1,3 +1,4 @@
+out
 bin
 .classpath
 .project
@@ -7,3 +8,4 @@ bin/*
 .idea/
 .ignore
 .idea/*
+forEver.iml

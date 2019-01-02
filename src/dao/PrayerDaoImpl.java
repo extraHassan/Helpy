@@ -1,16 +1,15 @@
 package dao;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Vector;
-
 import dao.consts.DatabaseInfos;
-import models.Contact;
 import models.Prayer;
 import utils.databases.DataSource;
 import utils.databases.Database;
 import utils.databases.MySQLDatabase;
+
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Vector;
 
 public class PrayerDaoImpl implements PrayerDao {
 
@@ -32,9 +31,9 @@ public class PrayerDaoImpl implements PrayerDao {
 			for (int j = 0; j < data[i].length; j++) {
 				// System.out.println(data[i][j]);
 				prayer.setId(Integer.parseInt(data[i][j]));
-				prayer.setArabicName(data[i][++j]);
 				prayer.setFrenchName(data[i][++j]);
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+                prayer.setArabicName(data[i][++j]);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 				LocalTime dateTime = LocalTime.parse(data[i][++j], formatter);
 				prayer.setTime(dateTime);
 				prayer.setNotificationMessage(data[i][++j]);
@@ -69,20 +68,20 @@ public class PrayerDaoImpl implements PrayerDao {
 	@Override
 	public List<Prayer> liste() {
 		List<Prayer> prayers = new Vector<>();
-		Prayer prayer = new Prayer();
 		String[][] data = db.select(DatabaseInfos.PRAYER);
 		for (int i = 1; i < data.length; i++) {
 			for (int j = 0; j < data[i].length; j++) {
-				// System.out.println(data[i][j]);
+                Prayer prayer = new Prayer();
 				prayer.setId(Integer.parseInt(data[i][j]));
-				prayer.setArabicName(data[i][++j]);
-				prayer.setFrenchName(data[i][++j]);
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+                prayer.setFrenchName(data[i][++j]);
+                prayer.setArabicName(data[i][++j]);
+
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 				LocalTime dateTime = LocalTime.parse(data[i][++j], formatter);
 				prayer.setTime(dateTime);
 				prayer.setNotificationMessage(data[i][++j]);
+                System.out.println("arabic name for prayer " + prayer.getArabicName());
 				prayers.add(prayer);
-
 			}
 		}
 		return prayers;

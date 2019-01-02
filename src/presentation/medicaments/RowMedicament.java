@@ -75,15 +75,15 @@ public class RowMedicament extends JPanel {
         icon.setHorizontalAlignment(0);
         icon.setVerticalAlignment(0);
 
-        RowLabel v1 = new RowLabel(medicament.getName(),medicament.getName());
-        RowLabel v2 = new RowLabel(medicament.getName(),medicament.getName());
-        RowLabel v3 = new RowLabel(medicament.getName(),medicament.getName());
+        RowLabel v1 = new RowLabel("date de fin",medicament.getEnd().toString());
+        RowLabel v2 = new RowLabel("Quand ?",medicament.getWhen());
+        RowLabel v3 = new RowLabel("A quel heure ?",medicament.getTime().toString());
 
         JPanel centerLeft = new JPanel();
         centerLeft.setLayout(new GridLayout(3,1,4,4));
-        centerLeft.add(v1);
         centerLeft.add(v2);
         centerLeft.add(v3);
+        centerLeft.add(v1);
         centerLeft.setBackground(designer.getBgColor());
         centerLeft.setOpaque(false);
 
@@ -97,15 +97,13 @@ public class RowMedicament extends JPanel {
         icon2.setHorizontalAlignment(0);
         icon2.setVerticalAlignment(0);
 
-        RowLabel i1 = new RowLabel(medicament.getName(),medicament.getName());
-        RowLabel i2 = new RowLabel(medicament.getName(),medicament.getName());
-        RowLabel i3 = new RowLabel(medicament.getName(),medicament.getName());
+        RowLabel i1 = new RowLabel("Case d'utilisation",medicament.getUseCase());
+        RowLabel i2 = new RowLabel("Prix",medicament.getPrice().toString());
 
         JPanel centerRight = new JPanel();
-        centerRight.setLayout(new GridLayout(3,1,4,4));
+        centerRight.setLayout(new GridLayout(2,1,4,4));
         centerRight.add(i1);
         centerRight.add(i2);
-        centerRight.add(i3);
         centerRight.setOpaque(false);
 
         JPanel centerRightContainer = new JPanel(new BorderLayout());
@@ -138,7 +136,7 @@ public class RowMedicament extends JPanel {
         setLayout(new BorderLayout());
         add(block_pane,BorderLayout.CENTER);
         setBackground(designer.getOpacityBgColor());
-        setPreferredSize(new Dimension(500,300));
+        setPreferredSize(new Dimension(700,300));
     }
 
 }

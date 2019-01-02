@@ -20,11 +20,9 @@ public class PrayerFrame extends JFrame {
 
     public void initPrayers(){
         List<Prayer> prayers = prayerService.findAll();
-
-        for(Prayer prayer:prayers){
-            this.prayerHashMap.put(prayer.getId(),prayer);
+        for(Prayer prayer : prayers){
+            prayerHashMap.put(prayer.getId(),prayer);
         }
-        System.out.println("prayers size ===> "+this.prayerHashMap.size());
     }
 
     public void initRowsPrayer(){
@@ -32,18 +30,16 @@ public class PrayerFrame extends JFrame {
         for(Integer prayerKey:prayerHashMap.keySet()){
             rowPrayHashMap.put(prayerKey,new RowPray(prayerHashMap.get(prayerKey)));
         }
-        System.out.println("rowPrayers size ===> "+this.rowPrayHashMap.size());
     }
 
     public void initBlockPane(){
         JPanel rowsContainer = new JPanel(new GridLayout(5,1,1,6));
         rowsContainer.setOpaque(false);
         initRowsPrayer();
+
         for(Integer rowPaneKey:rowPrayHashMap.keySet()){
             rowsContainer.add(rowPrayHashMap.get(rowPaneKey));
         }
-        System.out.println("blockPanes size ===> "+rowsContainer.getComponents().length);
-
         block_pane.setLayout(new BorderLayout());
         block_pane.setOpaque(false);
         block_pane.add(rowsContainer,BorderLayout.CENTER);
@@ -64,9 +60,7 @@ public class PrayerFrame extends JFrame {
         ImagePane block_pane_Container=new ImagePane("resources/images/masjid.png");
         block_pane_Container.setLayout(new BorderLayout());
         block_pane_Container.setPreferredSize(new Dimension(400,600));
-
         block_pane_Container.add(block_pane,BorderLayout.CENTER);
-
 
         setContentPane(block_pane_Container);
         initFrame();

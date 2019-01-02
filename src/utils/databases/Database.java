@@ -116,8 +116,10 @@ public class Database {
 		sb.append(")");
 
 		try {
+            System.out.println("before MySQL )>>>  | "+sb.toString());
 
 			Statement sql = db.createStatement();
+			System.out.println("MySQL )>>>  | "+sb.toString());
 			return sql.executeUpdate(sb.toString());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -184,7 +186,8 @@ public class Database {
 
 		try {
 			Statement sql = db.createStatement();
-			return sql.executeUpdate(sb.toString());
+            System.out.println("sql query : " + sb.toString());
+            return sql.executeUpdate(sb.toString());
 		} catch (Exception e) {
 			System.out.println("erreur + " + e.getMessage());
 			return 0;

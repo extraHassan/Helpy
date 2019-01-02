@@ -15,14 +15,18 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class AddMedicamentPane extends JFrame {
+public class AddMedicamentFrame extends JFrame {
     private ImagePane block_page = new ImagePane("resources/images/141540-OTE8CQ-402.jpg");
     private JButton addButton = new JButton();
     private Designer designer = new Designer();
     private MedicamentService medicamentService = new MedicamentService();
+    private ListMedicament listWhereWeAdd;
 
+    public AddMedicamentFrame(ListMedicament listMedicament){
+        this.listWhereWeAdd=listMedicament;
+    }
 
-    public AddMedicamentPane(){
+    public void construct(){
         buildBlockPage();
         setContentPane(block_page);
         pack();
@@ -46,7 +50,7 @@ public class AddMedicamentPane extends JFrame {
                 }
 
                 public void mouseClicked(MouseEvent e) {
-
+                    addButton.setCursor(new Cursor(Cursor.WAIT_CURSOR));
                     DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
                     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                     int errorCode = 0;
@@ -78,6 +82,8 @@ public class AddMedicamentPane extends JFrame {
                             med.setEnd(date);
                             med.setPrice(Double.parseDouble(rowFields[5].getInput().getText()));
                             medicamentService.addMedicament(med);
+                            listWhereWeAdd.refresh();
+
                             JOptionPane.showMessageDialog(null,"Médicament bien ajouté","info", 1);
 
                         }catch (Exception i){
@@ -114,7 +120,4 @@ public class AddMedicamentPane extends JFrame {
             block_page.add(addButton);
     }
 
-    public static void main(String[] args) {
-        new AddMedicamentPane();
-    }
 }
