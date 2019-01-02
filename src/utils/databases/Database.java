@@ -108,14 +108,10 @@ public class Database {
 				sb.append(", " + row[i] + "");
 			}
 			else if(row[i].toString().contains("\\")){
-                System.out.println("find it =================================>   "+row[i]);
                 String path = row[i].toString();
-                String newPath = path.replace("\\","/");
-                System.out.println(newPath+"   <=================================");
-                sb.append(", '" + path + "'");
-
-                System.out.println(path);
-
+                String replace = "\\\\";
+                String newPath = path.replace("\\",replace);
+                sb.append(", '" + newPath + "'");
             }
 
 			else {

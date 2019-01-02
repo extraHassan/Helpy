@@ -1,5 +1,6 @@
 package presentation.components;
 
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
@@ -117,5 +118,13 @@ public class Designer {
 
     public void setSmallMargin(EmptyBorder smallMargin) {
         this.smallMargin = smallMargin;
+    }
+
+    public ImageIcon resizeImage(String path, int width, int height ) {
+        ImageIcon icon = new ImageIcon(path);
+        Image image = icon.getImage();
+        Image image2 = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        ImageIcon icon2 = new ImageIcon(image2);
+        return icon2;
     }
 }

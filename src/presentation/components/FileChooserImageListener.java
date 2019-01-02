@@ -8,7 +8,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 
 public class FileChooserImageListener extends MouseAdapter {
-    private String imagePath;
+    private String imagePath="noSelect";
     private JLabel picLabel ;
 
     public FileChooserImageListener(JLabel picLabel) {
@@ -17,22 +17,6 @@ public class FileChooserImageListener extends MouseAdapter {
 
     public String getImagePath() {
         return imagePath;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
-
-    public FileChooserImageListener() {
-
-    }
-
-    public JLabel getPicLabel() {
-        return picLabel;
-    }
-
-    public void setPicLabel(JLabel picLabel) {
-        this.picLabel = picLabel;
     }
 
     public ImageIcon resizeImage(String path ) {
@@ -52,11 +36,10 @@ public class FileChooserImageListener extends MouseAdapter {
             imagePath= file.getPath();
             System.out.println("image choisie : "+imagePath);
             if(picLabel!= null) {
-                picLabel.setText("");
                 picLabel.setIcon(resizeImage(imagePath));
             }
         }else if(result == JFileChooser.CANCEL_OPTION) {
-            picLabel.setText("no file selected");
+            imagePath="noSelect";
         }
     }
 

@@ -88,7 +88,6 @@ public class ContactDaoImpl implements ContactDao {
 				LocalDate dateTime = LocalDate.parse(data[i][++j], formatter);
 				contact.setDateAdded(dateTime);
 			}
-			contact.setImage("resources/images/alarm-clock.png");
 			contacts.add(contact);
 		}
 		return contacts;

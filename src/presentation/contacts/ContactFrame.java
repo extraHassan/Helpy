@@ -6,10 +6,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class ContactFrame extends  JFrame  {
-
     private JTabbedPane jTabbedPane = new JTabbedPane();
     private ListContact listPane = new ListContact("resources/images/emoji.jpg");
-    private ManageContact manageContact = new ManageContact(listPane);
+    private AddContactPane manageContact = new AddContactPane(listPane);
     private JPanel block_pane = new JPanel(new BorderLayout());
 
     private static int lock = 0 ;

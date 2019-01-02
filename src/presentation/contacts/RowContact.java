@@ -14,11 +14,10 @@ import java.awt.event.MouseEvent;
 
 public class RowContact extends JPanel {
 
-    private Designer designer = new Designer() ;
     private JPanel center =null;
     private JLabel date;
     private JPanel contactHandler = new JPanel(new GridLayout(1,3,10,0));
-    private ImagePane profile = new ImagePane("resources/images/contact.png");
+    private ImagePane profile;
     private JLabel nameAndGroup;
     private JLabel phone;
 
@@ -31,6 +30,8 @@ public class RowContact extends JPanel {
 
     private Contact contact;
     private ContactService contactService  = new ContactService();
+
+
 
     public void initDate(){
         String labelDate  = contact.getDateAdded().toString();
@@ -101,7 +102,13 @@ public class RowContact extends JPanel {
 
     public void initProfile(){
         String labelProfile = contact.getImage();
-        profile = new ImagePane(labelProfile);
+        System.out.println("---->>< labelProfile is :> " + labelProfile );
+        if(labelProfile.equals("noSelect")){
+            profile = new ImagePane("resources/images/contact.png");
+        }else {
+            profile = new ImagePane(labelProfile);
+
+        }
         profile.setPreferredSize(new Dimension(70, 60));
         profile.setBackground(bgColor);
         profile.setBorder(BorderFactory.createMatteBorder(0,0,0,1,borderColor));
@@ -208,6 +215,7 @@ public class RowContact extends JPanel {
         block_pane.setBorder(emptyBorder);
         block_pane.setBackground(bgColor);
         block_pane.setOpaque(false);
+
         setBackground(new Color(128, 255, 112));
         add(block_pane);
     }

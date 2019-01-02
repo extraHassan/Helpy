@@ -42,13 +42,51 @@ public class RowPray extends  JPanel  {
     }
 
     public void initLabels() {
-        frenchName = new JLabel(prayer.getFrenchName());
-        arabicName = new JLabel(prayer.getArabicName());
+        if (prayer.getFrenchName().equals("Fajr")){
+            frenchName = new JLabel("Fajr");
+            frenchName.setFont(new Font("Dubai",Font.BOLD,25));
+            frenchName.setForeground(new Color(255, 102, 196));
+            frenchName.setVerticalAlignment(0);
+            frenchName.setHorizontalAlignment(0);
+            arabicName = new JLabel(designer.resizeImage("resources/images/fajrArabic .png",50,50));
+        }
+        else if(prayer.getFrenchName().equals("Dohr")){
+            frenchName = new JLabel("Dohr");
+            frenchName.setFont(new Font("Dubai",Font.BOLD,25));
+            frenchName.setForeground(new Color(255, 102, 196));
+            frenchName.setVerticalAlignment(0);
+            frenchName.setHorizontalAlignment(0);
+            arabicName = new JLabel(designer.resizeImage("resources/images/dohrArabic.png",50,50));
+        }
+        else if(prayer.getFrenchName().equals("Asr")){
+            frenchName = new JLabel("Asr");
+            frenchName.setFont(new Font("Dubai",Font.BOLD,25));
+            frenchName.setForeground(new Color(255, 102, 196));
+            frenchName.setVerticalAlignment(0);
+            frenchName.setHorizontalAlignment(0);
+            arabicName = new JLabel(designer.resizeImage("resources/images/asr.png",50,50));
+        }
+        else if(prayer.getFrenchName().equals("Maghrib")){
+            frenchName = new JLabel("Maghrib");
+            frenchName.setFont(new Font("Dubai",Font.BOLD,25));
+            frenchName.setForeground(new Color(255, 102, 196));
+            frenchName.setVerticalAlignment(0);
+            frenchName.setHorizontalAlignment(0);
+            arabicName = new JLabel(designer.resizeImage("resources/images/maghrib.png",50,50));
+        }
+        else {
+            frenchName = new JLabel("Ichaa");
+            frenchName.setFont(new Font("Dubai",Font.BOLD,25));
+            frenchName.setForeground(new Color(255, 102, 196));
+            frenchName.setVerticalAlignment(0);
+            frenchName.setHorizontalAlignment(0);
+            arabicName = new JLabel(designer.resizeImage("resources/images/ichaaAr.png",50,50));
+        }
+
+
         time = new JLabel(prayer.getTime().toString());
-        arabicName.setFont(designer.getFont());
-        arabicName.setForeground(new Color(255, 102, 196));
-        frenchName.setFont(designer.getFont());
-        frenchName.setForeground(new Color(255, 102, 196));
+        time.setHorizontalAlignment(0);
+        time.setVerticalAlignment(0);
         time.setFont(designer.getFont());
         time.setForeground(new Color(255, 102, 196));
         setTimeAction();

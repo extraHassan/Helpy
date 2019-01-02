@@ -1,6 +1,5 @@
 package presentation;
 
-import jdk.nashorn.internal.scripts.JO;
 import presentation.components.Designer;
 import presentation.components.ImagePane;
 import presentation.contacts.ContactFrame;
@@ -15,17 +14,22 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 
 public class Application extends JFrame {
-
+    private Designer designer = new Designer();
     private JPanel block_page = new JPanel();
     private ImagePane blockPageContainer = new ImagePane("resources/images/bgApplication.png");
     private JPanel prayer = new JPanel(new BorderLayout());
     private JPanel contact = new JPanel(new BorderLayout());
     private JPanel medicament = new JPanel(new BorderLayout());
     private JPanel agenda = new JPanel(new BorderLayout());
-    private JLabel mail = new JLabel(resizeImage("resources/images/email.png",70,70));
-    private Designer designer = new Designer();
+    private JLabel mail = new JLabel(designer.resizeImage("resources/images/email.png",70,70));
+
     private JPanel mailContainer = new JPanel(new BorderLayout());
-    private  LineBorder lineBorder ;
+    private JPanel prayerContainer = new JPanel(new BorderLayout());
+    private JPanel contactContainer = new JPanel(new BorderLayout());
+    private JPanel medicamentContainer = new JPanel(new BorderLayout());
+    private JPanel agendaContainer = new JPanel(new BorderLayout());
+    private  LineBorder lineBorder = new LineBorder(designer.getBgColor(),5,true);
+
     private JPanel mailMenu;
 
     public Application(){
@@ -51,39 +55,42 @@ public class Application extends JFrame {
             if (PrayerFrame.getLock()==1)
                 flag=true;
             PrayerFrame.getInstance();
+            click.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
         else if (frameIndex==1){
             if (ContactFrame.getLock()==1)
                 flag=true;
             ContactFrame.getInstance();
+            click.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
         else if(frameIndex==2){
             if (MailFrame.getLock()==1)
                 flag=true;
             MailFrame.getInstance();
+            click.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
         else{
             if (MedicamentFrame.getLock()==1)
                 flag=true;
             MedicamentFrame.getInstance();
+            click.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
 
         if(flag==true){
-            click.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             JOptionPane.showMessageDialog(null,"Le panneau est déjà ouvert ! ");
         }
     }
 
 	public void initFramesActions(){
-        prayer.addMouseListener(new MouseAdapter() {
+        prayerContainer.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
-                prayer.setCursor(new Cursor(Cursor.HAND_CURSOR));
-                prayer.setBorder(new LineBorder(Color.red,5,true));
+                prayerContainer.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                prayerContainer.setBorder(new LineBorder(Color.red,5,true));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                prayer.setBorder(new LineBorder(designer.getBgColor(),5,true));
+                prayerContainer.setBorder(new LineBorder(designer.getBgColor(),5,true));
             }
 
             public void mouseClicked(MouseEvent e) {
@@ -93,13 +100,13 @@ public class Application extends JFrame {
 
         contact.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
-                contact.setCursor(new Cursor(Cursor.HAND_CURSOR));
-                contact.setBorder(new LineBorder(Color.red,5,true));
+                contactContainer.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                contactContainer.setBorder(new LineBorder(Color.red,5,true));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                contact.setBorder(new LineBorder(designer.getBgColor(),5,true));
+                contactContainer.setBorder(new LineBorder(designer.getBgColor(),5,true));
             }
 
             public void mouseClicked(MouseEvent e) {
@@ -109,13 +116,13 @@ public class Application extends JFrame {
 
         medicament.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
-                medicament.setCursor(new Cursor(Cursor.HAND_CURSOR));
-                medicament.setBorder(new LineBorder(Color.red,5,true));
+                medicamentContainer.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                medicamentContainer.setBorder(new LineBorder(Color.red,5,true));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                medicament.setBorder(new LineBorder(designer.getBgColor(),5,true));
+                medicamentContainer.setBorder(new LineBorder(designer.getBgColor(),5,true));
             }
 
             public void mouseClicked(MouseEvent e) {
@@ -125,13 +132,13 @@ public class Application extends JFrame {
 
         agenda.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
-                agenda.setCursor(new Cursor(Cursor.HAND_CURSOR));
-                agenda.setBorder(new LineBorder(Color.red,5,true));
+                agendaContainer.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                agendaContainer.setBorder(new LineBorder(Color.red,5,true));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                agenda.setBorder(new LineBorder(designer.getBgColor(),5,true));
+                agendaContainer.setBorder(new LineBorder(designer.getBgColor(),5,true));
             }
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -159,35 +166,41 @@ public class Application extends JFrame {
 
 	public void initBlockPage(){
 
-	    prayer.add(new JLabel(resizeImage("resources/images/mosque.png",120,120)));
-	    contact.add(new JLabel(resizeImage("resources/images/phone-book.png",120,120)));
-	    medicament.add(new JLabel(resizeImage("resources/images/medicine.png",120,120)));
-	    agenda.add(new JLabel(resizeImage("resources/images/calendar.png",120,120)));
+        prayer.add(new JLabel(designer.resizeImage("resources/images/mosque.png",120,120)));
+	    contact.add(new JLabel(designer.resizeImage("resources/images/phone-book.png",120,120)));
+	    medicament.add(new JLabel(designer.resizeImage("resources/images/medicine.png",120,120)));
+	    agenda.add(new JLabel(designer.resizeImage("resources/images/calendar.png",120,120)));
 
 	    prayer.setBackground(new Color(0, 255, 135,230));
         contact.setBackground(new Color(0, 255, 135,230));
         medicament.setBackground(new Color(0, 255, 135,230));
         agenda.setBackground(new Color(0, 255, 135,230));
 
+        prayerContainer.add(prayer);
+        prayerContainer.setOpaque(false);
+        contactContainer.add(contact);
+        contactContainer.setOpaque(false);
+        medicamentContainer.add(medicament);
+        medicamentContainer.setOpaque(false);
+        agendaContainer.add(agenda);
+        agendaContainer.setOpaque(false);
 
-        lineBorder = new LineBorder(designer.getBgColor(),5,true);
-        prayer.setBorder(lineBorder);
-        contact.setBorder(lineBorder);
-        medicament.setBorder(lineBorder);
-        agenda.setBorder(lineBorder);
+        prayerContainer.setBorder(lineBorder);
+        contactContainer.setBorder(lineBorder);
+        medicamentContainer.setBorder(lineBorder);
+        agendaContainer.setBorder(lineBorder);
 
 
         block_page.setLayout(new BorderLayout());
 
 	    JPanel center = new JPanel();
         center.setLayout(new GridLayout(2,2,40,40));
-        center.add(prayer);
-        center.add(medicament);
-        center.add(contact);
-        center.add(agenda);
+        center.add(prayerContainer);
+        center.add(medicamentContainer);
+        center.add(contactContainer);
+        center.add(agendaContainer);
         center.setOpaque(false);
         center.setPreferredSize(new Dimension(500,500));
-        setPreferredSize(new Dimension(400,800));
         center.setBorder(BorderFactory.createEmptyBorder(30,15,30,15));
 
 
@@ -200,23 +213,15 @@ public class Application extends JFrame {
         mailMenu.setBorder(BorderFactory.createMatteBorder(5,0,0,0,designer.getBgColor()));
         mailMenu.setOpaque(false);
 
-
-
-        JLabel logApp = new JLabel(resizeImage("resources/images/lasthelpy.png",100,100));
+        JLabel logApp = new JLabel(designer.resizeImage("resources/images/lasthelpy.png",100,100));
         logApp.setOpaque(false);
         logApp.setBorder(BorderFactory.createEmptyBorder(10,0,0,0));
         block_page.add(logApp,BorderLayout.NORTH);
         block_page.add(center,BorderLayout.CENTER);
         block_page.add(mailMenu,BorderLayout.SOUTH);
         block_page.setOpaque(false);
-    }
 
-    public ImageIcon resizeImage(String path,int width,int height ) {
-        ImageIcon icon = new ImageIcon(path);
-        Image image = icon.getImage();
-        Image image2 = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        ImageIcon icon2 = new ImageIcon(image2);
-        return icon2;
+        setPreferredSize(new Dimension(400,800));
     }
 
     public static void main(String[] args) {
