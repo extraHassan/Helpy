@@ -82,12 +82,6 @@ public class RowContact extends JPanel {
                     if(prenom!= null && !prenom.isEmpty() && name!=null && !name.isEmpty()){
                         contactService.updateName(contact.getId(),name +" " + prenom);
                         nameAndGroup.setText(name+" "+prenom+" ("+contact.getGroup()+")");
-                        try {
-                            setCursor(new Cursor(Cursor.WAIT_CURSOR));
-                            Thread.sleep(800);
-                        } catch (InterruptedException e1) {
-                            e1.printStackTrace();
-                        }
                     }
                     if(group != null && !group.isEmpty()){
                         contactService.updateGroup(contact.getId(),group);

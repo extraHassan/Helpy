@@ -25,12 +25,10 @@ public class MySQLDatabase extends DataSource{
 	
 	
 	public String getURL() {
-		
 		return getBridge()+"//"+getHost()+"/"+getSource();
 	}
 
 	public String startDelimiter() {
-	
 		return "'";
 	}
 

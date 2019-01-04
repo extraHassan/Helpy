@@ -1,5 +1,7 @@
 package frontEnd;
 
+import backEnd.models.Prayer;
+import backEnd.services.PrayerService;
 import frontEnd.agenda.SwingFrame;
 import frontEnd.mailing.MailFrame;
 import frontEnd.utils.components.Designer;
@@ -7,10 +9,14 @@ import frontEnd.utils.components.ImagePane;
 import frontEnd.contacts.ContactFrame;
 import frontEnd.medicaments.MedicamentFrame;
 import frontEnd.prieres.PrayerFrame;
+import sun.util.resources.cldr.ak.LocaleNames_ak;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalTime;
+import java.util.List;
+import java.util.Vector;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
@@ -234,7 +240,40 @@ public class Application extends JFrame {
     }
 
     public static void main(String[] args) {
-        new Application();
-    }
+        Application app = new Application();
+        /*
+        *
+        * notification using the bad way
+        PrayerService prayerService = new PrayerService();
+        while (true) {
+            java.util.List<Prayer> prayers = prayerService.findAll();
+            int notificated = 0;
 
+            for (Prayer p : prayers) {
+                int hour = LocalTime.now().getHour();
+                String minute;
+                if (LocalTime.now().getMinute() < 10) {
+                    minute = "0" + LocalTime.now().getMinute();
+                } else {
+                    minute = "" + LocalTime.now().getMinute();
+                }
+                String nowTime = hour + ":" + minute;
+                String prayerTime = p.getTime().toString();
+                System.out.println("now time ==> " + nowTime);
+                System.out.println("prayer time ===> " + prayerTime);
+                if (nowTime.equals(prayerTime) && notificated == 0) {
+                    JOptionPane.showMessageDialog(app, "nod tsali allah yhdik " + p.getFrenchName());
+                    notificated = 1;
+                }
+            }
+            try {
+                Thread.sleep(40000);// test chaque 50 seconde
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        */
+
+    }
 }
+

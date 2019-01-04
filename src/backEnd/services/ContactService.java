@@ -13,7 +13,7 @@ public class ContactService {
 		contactDao = new ContactDaoImpl();
 	}
 
-	public boolean addContact(Contact contact) {
+	synchronized public boolean addContact(Contact contact) {
 		return contactDao.insert(contact);
 	}
 
@@ -21,31 +21,31 @@ public class ContactService {
 		return contactDao.select(id);
 	}
 
-	public boolean delete(int id) {
+	synchronized public boolean delete(int id) {
 		return contactDao.delete(id);
 	}
 
-	public List<Contact> findAll() {
+	synchronized public List<Contact> findAll() {
 		return contactDao.liste();
 	}
 
-	public boolean updateName(int id, String name) {
+	synchronized public  boolean updateName(int id, String name) {
 		return contactDao.updateName(id, name);
 	}
 
-	public boolean updateGroup(int id, String group) {
+	synchronized public boolean updateGroup(int id, String group) {
 		return contactDao.updateGroup(id, group);
 	}
 
-	public boolean updateNumber(int id, String number) {
+	synchronized public boolean updateNumber(int id, String number) {
 		return contactDao.updateNumber(id, number);
 	}
 
-	public boolean updateImage(int id, String image) {
+	synchronized public boolean updateImage(int id, String image) {
 		return contactDao.updateImage(id, image);
 	}
 
-	public boolean updateFavorite(int id, boolean favorite) {
+	synchronized public boolean updateFavorite(int id, boolean favorite) {
 		return contactDao.updateFavorite(id, favorite);
 	}
 }
