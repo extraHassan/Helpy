@@ -1,6 +1,6 @@
 # Welcome to the **Helpy** Application wiki!
 
-### # This application is a freelance project developed with Java. 
+### # This application is a freelance project developed with Java 1.8 . 
 
 ## Developers : 
 
