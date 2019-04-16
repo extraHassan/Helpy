@@ -1,4 +1,4 @@
-# Welcome to the Old-men-facilitator-app wiki!
+# Welcome to the **Helpy** wiki!
 
 ### # This application is a freelance project developed with Java. 
 
