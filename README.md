@@ -1,4 +1,4 @@
-# Welcome to the **Helpy** wiki!
+# Welcome to the **Helpy** Application wiki!
 
 ### # This application is a freelance project developed with Java. 
 
