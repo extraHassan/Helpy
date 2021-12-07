@@ -5,8 +5,7 @@
 ## Developers : 
 
 1.  Hassan El-mzabi  `fornt-end`
-2.  Ahmed Belarbi `Back-end`
-
+2.  
 ## Best practices used in this project : 
 
 1. Responsive GUI with SWING library
